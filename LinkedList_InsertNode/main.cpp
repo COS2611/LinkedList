@@ -19,10 +19,10 @@ void printList(Node *start)
 }
 
 
-void insertFirst(Node *&head)
+void insertFirst(Node *&head, int newValue)
 {
 	Node *newNode = new Node();
-	newNode->data = 99;
+	newNode->data = newValue;
 	
 	// Point the new node to the head
 	newNode->link = head;
@@ -50,7 +50,7 @@ int main()
 	printList(head);
 	
 	// insert a node at the beginning of the list and print the list
-	insertFirst(head);
+	insertFirst(head, 99);
 	std::cout << "Linked list after adding node at the beginning:\n";
 	printList(head);
 	
