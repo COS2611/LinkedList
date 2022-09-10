@@ -32,27 +32,85 @@ void insertFirst(Node *&head, int newValue)
 }
 
 
+void insertLast(Node **head, int newValue)
+{
+	// create a new node with newValue
+	Node *newNode = new Node();
+	newNode->data = newValue;
+	newNode->link = NULL;
+	
+	if (*head == NULL) // if the list is empty
+	{
+		*head = newNode;
+		return;
+	}
+	
+	// find the last node
+	Node *lastNode = *head;
+	while (lastNode->link != NULL)
+	{
+		lastNode = lastNode->link;
+	}
+	
+	// insert the new node after the last node
+	lastNode->link = newNode;
+}
+
+
+void insertAfter(Node *previous, int newValue)
+{
+	// check if the previous node is NULL
+	if (previous == NULL)
+	{
+		std::cout << "Previous cannot be NULL" << std::endl;
+		return;
+	}
+	
+	// create a new node
+	Node *newNode = new Node();
+	newNode->data = newValue;
+	
+	// insert the new node after the previous node
+	newNode->link = previous->link;
+	previous->link = newNode;
+}
+
+
 int main()
 {
 	Node *head = new Node();
 	Node *second = new Node();
 	Node *third = new Node();
+	Node *fourth = new Node();
 	
-	head->data = 1;
+	head->data = 45;
 	head->link = second;
-	second->data = 2;
+	second->data = 65;
 	second->link = third;
-	third->data = 3;
-	third->link = NULL;
+	third->data = 34;
+	third->link = fourth;
+	fourth->data = 76;
+	fourth->link = NULL;
 	
 	// print the linked list
-	std::cout << "Linked list before adding node at beginning:\n";
+	std::cout << "Original linked list:\n";
 	printList(head);
 	
 	// insert a node at the beginning of the list and print the list
-	insertFirst(head, 99);
-	std::cout << "Linked list after adding node at the beginning:\n";
+//	insertFirst(head, 99);
+//	std::cout << "Linked list after adding node at the beginning:\n";
+//	printList(head);
+	
+	// insert a node at the end of the linked list
+//	insertLast(&head, 50);
+//	std::cout << "\nLinked list after adding node at the end:\n";
+//	printList(head);
+	
+	// insert a node at a specified location
+	insertAfter(head->link, 50);
+	std::cout << "The linked list after inserting the new node:\n";
 	printList(head);
+	
 	
 	return 0;
 }
