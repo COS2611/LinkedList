@@ -3,8 +3,8 @@
 
 struct Node
 {
-	int info;
-	Node *link;
+	int info {NULL};	// default: initialize to NULL
+	Node *link {NULL};	// default: initialize to NULL
 };
 
 
@@ -89,14 +89,14 @@ int main()
 {
 	// building a linked list (forward)
 	Node *first {NULL}, *last {NULL}, *newNode {NULL};
-	int num{};
+	int num {NULL};
 	
 	std::cin >> num;		// user enters an integer
 	newNode = new Node;		// allocate memory on the heap
 	
 	// build first node
 	newNode->info = num;
-	newNode->link = NULL;
+	newNode->link = NULL;	
 	
 	return 0;
 }
