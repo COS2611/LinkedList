@@ -91,12 +91,33 @@ int main()
 	Node *first {NULL}, *last {NULL}, *newNode {NULL};
 	int num {NULL};
 	
-	std::cin >> num;		// user enters an integer
-	newNode = new Node;		// allocate memory on the heap
+	std::cout << "Enter a list of integers ending with -999:" << std::endl;
+	std::cin >> num;		// enter the first integer
+		
+	while (num != -999)
+	{
+		newNode = new Node;
+		newNode->info = num;
+		newNode->link = NULL;
+		
+		if (first == NULL)	// if the list is empty
+		{
+			// insert the new node at the beginning
+			first = newNode;
+			last = newNode;
+		}
+		
+		else	// the list is not empty
+		{
+			// insert the new node at then end
+			last->link = newNode;
+			last = newNode;
+		}
+		std::cin >> num;
+	}
 	
-	// build first node
-	newNode->info = num;
-	newNode->link = NULL;	
+	std::cout << "\nThe linked list:" << std::endl;
+	printList(first);
 	
 	return 0;
 }
