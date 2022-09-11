@@ -107,8 +107,17 @@ int main()
 //	printList(head);
 	
 	// insert a node at a specified location
-	insertAfter(head->link, 50);
-	std::cout << "The linked list after inserting the new node:\n";
+//	insertAfter(head->link, 50);
+//	std::cout << "The linked list after inserting the new node:\n";
+//	printList(head);
+	
+	// delete a node
+	Node *p = head->link;
+	Node *q = p->link;
+	p->link = q->link;	// original linked list: 45, 65, 34, 76
+	delete q;			// new linked list: 45, 65, 76
+	
+	std::cout << "Linked list after deleting the node:\n";
 	printList(head);
 	
 	

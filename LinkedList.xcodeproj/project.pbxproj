@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5E7A20DB28CCC48300C84BE2 /* LinkedList_InsertNode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LinkedList_InsertNode; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E7A20DB28CCC48300C84BE2 /* LinkedList */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LinkedList; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E7A20DE28CCC48300C84BE2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -41,7 +41,7 @@
 		5E7A20D228CCC48300C84BE2 = {
 			isa = PBXGroup;
 			children = (
-				5E7A20DD28CCC48300C84BE2 /* LinkedList_InsertNode */,
+				5E7A20DD28CCC48300C84BE2 /* LinkedList */,
 				5E7A20DC28CCC48300C84BE2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,25 +49,25 @@
 		5E7A20DC28CCC48300C84BE2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E7A20DB28CCC48300C84BE2 /* LinkedList_InsertNode */,
+				5E7A20DB28CCC48300C84BE2 /* LinkedList */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5E7A20DD28CCC48300C84BE2 /* LinkedList_InsertNode */ = {
+		5E7A20DD28CCC48300C84BE2 /* LinkedList */ = {
 			isa = PBXGroup;
 			children = (
 				5E7A20DE28CCC48300C84BE2 /* main.cpp */,
 			);
-			path = LinkedList_InsertNode;
+			path = LinkedList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5E7A20DA28CCC48300C84BE2 /* LinkedList_InsertNode */ = {
+		5E7A20DA28CCC48300C84BE2 /* LinkedList */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5E7A20E228CCC48300C84BE2 /* Build configuration list for PBXNativeTarget "LinkedList_InsertNode" */;
+			buildConfigurationList = 5E7A20E228CCC48300C84BE2 /* Build configuration list for PBXNativeTarget "LinkedList" */;
 			buildPhases = (
 				5E7A20D728CCC48300C84BE2 /* Sources */,
 				5E7A20D828CCC48300C84BE2 /* Frameworks */,
@@ -77,9 +77,9 @@
 			);
 			dependencies = (
 			);
-			name = LinkedList_InsertNode;
+			name = LinkedList;
 			productName = LinkedList_InsertNode;
-			productReference = 5E7A20DB28CCC48300C84BE2 /* LinkedList_InsertNode */;
+			productReference = 5E7A20DB28CCC48300C84BE2 /* LinkedList */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -96,7 +96,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E7A20D628CCC48300C84BE2 /* Build configuration list for PBXProject "LinkedList_InsertNode" */;
+			buildConfigurationList = 5E7A20D628CCC48300C84BE2 /* Build configuration list for PBXProject "LinkedList" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -109,7 +109,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5E7A20DA28CCC48300C84BE2 /* LinkedList_InsertNode */,
+				5E7A20DA28CCC48300C84BE2 /* LinkedList */,
 			);
 		};
 /* End PBXProject section */
@@ -254,7 +254,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E7A20D628CCC48300C84BE2 /* Build configuration list for PBXProject "LinkedList_InsertNode" */ = {
+		5E7A20D628CCC48300C84BE2 /* Build configuration list for PBXProject "LinkedList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E7A20E028CCC48300C84BE2 /* Debug */,
@@ -263,7 +263,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5E7A20E228CCC48300C84BE2 /* Build configuration list for PBXNativeTarget "LinkedList_InsertNode" */ = {
+		5E7A20E228CCC48300C84BE2 /* Build configuration list for PBXNativeTarget "LinkedList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E7A20E328CCC48300C84BE2 /* Debug */,
