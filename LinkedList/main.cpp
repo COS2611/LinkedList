@@ -85,15 +85,14 @@ void deleteNode(Node *head, Node *theNode)
 }
 
 
-int main()
+Node *buildListForward()
 {
-	// building a linked list (forward)
 	Node *first {NULL}, *last {NULL}, *newNode {NULL};
 	int num {NULL};
 	
 	std::cout << "Enter a list of integers ending with -999:" << std::endl;
 	std::cin >> num;		// enter the first integer
-		
+	
 	while (num != -999)
 	{
 		newNode = new Node;
@@ -115,6 +114,14 @@ int main()
 		}
 		std::cin >> num;
 	}
+	return first;
+}
+
+
+int main()
+{
+	// building a linked list (forward)
+	Node * first = buildListForward();
 	
 	std::cout << "\nThe linked list:" << std::endl;
 	printList(first);
