@@ -76,6 +76,15 @@ void insertAfter(Node *previous, int newValue)
 }
 
 
+void deleteNode(Node *head, Node *theNode)
+{
+	Node *p = head->link;
+	Node *q = theNode;
+	p->link = q->link;
+	delete q;
+}
+
+
 int main()
 {
 	Node *head = new Node();
@@ -112,10 +121,7 @@ int main()
 //	printList(head);
 	
 	// delete a node
-	Node *p = head->link;
-	Node *q = p->link;
-	p->link = q->link;	// original linked list: 45, 65, 34, 76
-	delete q;			// new linked list: 45, 65, 76
+	deleteNode(head, head->link->link);
 	
 	std::cout << "Linked list after deleting the node:\n";
 	printList(head);
