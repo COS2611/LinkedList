@@ -118,10 +118,30 @@ Node *buildListForward()
 }
 
 
+Node *buildListBackward()
+{
+	Node *first {NULL}, *newNode {NULL};
+	int num {NULL};
+	
+	std::cout << "Enter a list of integers ending with -999:" << std::endl;
+	std::cin >> num;		// enter the first integer
+	
+	while (num != -999)
+	{
+		newNode = new Node;
+		newNode->info = num;
+		newNode->link = first;
+		first = newNode;
+		std::cin >> num;
+	}
+	return first;
+}
+
+
 int main()
 {
-	// building a linked list (forward)
-	Node * first = buildListForward();
+	// building a list backwards
+	Node *first = buildListBackward();
 	
 	std::cout << "\nThe linked list:" << std::endl;
 	printList(first);
