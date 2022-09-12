@@ -1,14 +1,16 @@
 #include <iostream>
 
 
-struct Node
+template <class elemType>
+struct NodeType
 {
-	int info {NULL};	// default: initialize to NULL
-	Node *link {NULL};	// default: initialize to NULL
+	int info {NULL};
+	NodeType<elemType> *link {NULL};	
 };
 
 
-void printList(Node *start)
+template <class elemType>
+void printList(NodeType<elemType> *start)
 {
 	while (start != NULL)
 	{
@@ -18,10 +20,10 @@ void printList(Node *start)
 	return;
 }
 
-
-void insertFirst(Node *&head, int newValue)
+template <class elemType>
+void insertFirst(NodeType<elemType> *&head, int newValue)
 {
-	Node *newNode = new Node();
+	NodeType<elemType> *newNode = new NodeType<elemType>();
 	newNode->info = newValue;
 	
 	// Point the new node to the head
@@ -31,11 +33,11 @@ void insertFirst(Node *&head, int newValue)
 	head = newNode;
 }
 
-
-void insertLast(Node **head, int newValue)
+template <class elemType>
+void insertLast(NodeType<elemType> **head, int newValue)
 {
 	// create a new node with newValue
-	Node *newNode = new Node();
+	NodeType<elemType> *newNode = new NodeType<elemType>();
 	newNode->info = newValue;
 	newNode->link = NULL;
 	
@@ -46,7 +48,7 @@ void insertLast(Node **head, int newValue)
 	}
 	
 	// find the last node
-	Node *lastNode = *head;
+	NodeType<elemType> *lastNode = *head;
 	while (lastNode->link != NULL)
 	{
 		lastNode = lastNode->link;
@@ -56,8 +58,8 @@ void insertLast(Node **head, int newValue)
 	lastNode->link = newNode;
 }
 
-
-void insertAfter(Node *previous, int newValue)
+template <class elemType>
+void insertAfter(NodeType<elemType> *previous, int newValue)
 {
 	// check if the previous node is NULL
 	if (previous == NULL)
@@ -67,7 +69,7 @@ void insertAfter(Node *previous, int newValue)
 	}
 	
 	// create a new node
-	Node *newNode = new Node();
+	NodeType<elemType> *newNode = new NodeType<elemType>();
 	newNode->info = newValue;
 	
 	// insert the new node after the previous node
@@ -76,18 +78,20 @@ void insertAfter(Node *previous, int newValue)
 }
 
 
-void deleteNode(Node *head, Node *theNode)
+template <class elemType>
+void deleteNode(NodeType<elemType> *head, NodeType<elemType> *theNode)
 {
-	Node *p = head->link;
-	Node *q = theNode;
+	NodeType<elemType> *p = head->link;
+	NodeType<elemType> *q = theNode;
 	p->link = q->link;
 	delete q;
 }
 
 
-Node *buildListForward()
+template <class elemType>
+NodeType<elemType> *buildListForward()
 {
-	Node *first {NULL}, *last {NULL}, *newNode {NULL};
+	NodeType<elemType> *first {NULL}, *last {NULL}, *newNode {NULL};
 	int num {NULL};
 	
 	std::cout << "Enter a list of integers ending with -999:" << std::endl;
@@ -95,7 +99,7 @@ Node *buildListForward()
 	
 	while (num != -999)
 	{
-		newNode = new Node;
+		newNode = new NodeType<elemType>;
 		newNode->info = num;
 		newNode->link = NULL;
 		
@@ -118,9 +122,10 @@ Node *buildListForward()
 }
 
 
-Node *buildListBackward()
+template <class elemType>
+NodeType<elemType> *buildListBackward()
 {
-	Node *first {NULL}, *newNode {NULL};
+	NodeType<elemType> *first {NULL}, *newNode {NULL};
 	int num {NULL};
 	
 	std::cout << "Enter a list of integers ending with -999:" << std::endl;
@@ -128,7 +133,7 @@ Node *buildListBackward()
 	
 	while (num != -999)
 	{
-		newNode = new Node;
+		newNode = new NodeType<elemType>;
 		newNode->info = num;
 		newNode->link = first;
 		first = newNode;
@@ -141,7 +146,7 @@ Node *buildListBackward()
 int main()
 {
 	// building a list backwards
-	Node *first = buildListBackward();
+	NodeType<int> *first = buildListBackward<int>();
 	
 	std::cout << "\nThe linked list:" << std::endl;
 	printList(first);
