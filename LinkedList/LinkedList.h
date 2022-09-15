@@ -18,6 +18,11 @@ public:
 	void initializeList();	// initialize list as empty list
 	void destroyList();		// deallocate memory
 	void print() const;		// print the list
+	bool isEmpty() const;	// returns true if list is empty
+	int length() const;		// returns the number of nodes in the list
+	elemType front() const;	// returns the first node's info
+	elemType back() const;	// returns the last node's info
+	
 	
 protected:
 	int count;					// number of elements in the list
@@ -70,6 +75,36 @@ void LinkedListType<elemType>::print() const
 		std::cout << current->info << std::endl;
 		current = current->link;
 	}
+}
+
+
+template <class elemType>
+bool LinkedListType<elemType>::isEmpty() const
+{
+	return first == NULL;
+}
+
+
+template <class elemType>
+int LinkedListType<elemType>::length() const
+{
+	return count;
+}
+
+
+template <class elemType>
+elemType LinkedListType<elemType>::front() const
+{
+	assert(first != NULL);
+	return first->info;
+}
+
+
+template <class elemType>
+elemType LinkedListType<elemType>::back() const
+{
+	assert(last != NULL);
+	return last->info;
 }
 
 
