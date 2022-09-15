@@ -1,12 +1,7 @@
 #ifndef LinkedList_h
 #define LinkedList_h
 
-template <class elemType>
-struct NodeType
-{
-	int info;
-	NodeType<elemType> *link;
-};
+#include "NodeType.h"
 
 
 template <class elemType>
