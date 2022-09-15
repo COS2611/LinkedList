@@ -27,6 +27,8 @@ public:
 	void deleteNode(const elemType& deleteItem);	// delete a node from the list
 	void buildListForward();
 	void buildListBackward();
+	bool search(const elemType& searchItem);	// returns true if item is in the list
+
 	
 	
 protected:
@@ -238,6 +240,27 @@ void LinkedListType<elemType>::buildListBackward()
 		insertFirst(num);
 		std::cin >> num;
 	}
+}
+
+
+template <class elemType>
+bool LinkedListType<elemType>::search(const elemType& searchItem)
+{
+	NodeType<elemType> *current = first;
+	bool found = false;
+	
+	while (current != NULL && !found)
+	{
+		if (current->info == searchItem)
+		{
+			found = true;
+		}
+		else
+		{
+			current = current->link;
+		}
+	}
+	return found;
 }
 
 #endif /* LinkedList_h */

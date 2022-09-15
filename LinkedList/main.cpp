@@ -31,8 +31,14 @@ int main()
 	myList.buildListForward();
 	myList.print();
 	
-	myList.buildListBackward();
-	myList.print();
+	// search the list for a user-entered number
+	int number {};
+	std::cout << "Enter a number to search for: ";
+	std::cin >> number;
+	if (myList.search(number))
+		std::cout << number << " is in the list." << std::endl;
+	else
+		std::cout << number << " is not in the list." << std::endl;
 	
 	
 	return 0;
