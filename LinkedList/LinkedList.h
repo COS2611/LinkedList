@@ -2,6 +2,7 @@
 #define LinkedList_h
 
 #include "NodeType.h"
+#include "LinkedListIterator.h"
 
 
 template <class elemType>
@@ -23,6 +24,8 @@ public:
 	void buildListForward();
 	void buildListBackward();
 	bool search(const elemType& searchItem);	// returns true if item is in the list
+	LinkedListIterator<elemType> begin();		// returns an iterator to the first node
+	LinkedListIterator<elemType> end();			// returns an iterator to the last node
 
 	
 	
@@ -256,6 +259,22 @@ bool LinkedListType<elemType>::search(const elemType& searchItem)
 		}
 	}
 	return found;
+}
+
+
+template <class elemType>
+LinkedListIterator<elemType> LinkedListType<elemType>::begin()
+{
+	LinkedListIterator<elemType> temp {first};
+	return temp;
+}
+
+
+template <class elemType>
+LinkedListIterator<elemType> LinkedListType<elemType>::end()
+{
+	LinkedListIterator<elemType> temp {NULL};
+	return temp;
 }
 
 #endif /* LinkedList_h */
