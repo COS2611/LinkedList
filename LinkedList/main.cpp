@@ -1,4 +1,5 @@
 #include <iostream>
+#include "LinkedList.h"
 
 
 /*
@@ -148,6 +149,7 @@ NodeType<elemType> *buildListBackward()
 
 int main()
 {
+	LinkedListType<int> myList;
 	
 	return 0;
 }
