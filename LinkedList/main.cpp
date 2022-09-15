@@ -11,16 +11,7 @@ struct NodeType
 };
 
 
-template <class elemType>
-void printList(NodeType<elemType> *start)
-{
-	while (start != NULL)
-	{
-		std::cout << start->info << std::endl;
-		start = start->link;
-	}
-	return;
-}
+
 
 template <class elemType>
 void insertFirst(NodeType<elemType> *&head, int newValue)

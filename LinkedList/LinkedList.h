@@ -17,6 +17,7 @@ public:
 	~LinkedListType();		// destructor
 	void initializeList();	// initialize list as empty list
 	void destroyList();		// deallocate memory
+	void print() const;		// print the list
 	
 protected:
 	int count;					// number of elements in the list
@@ -59,6 +60,17 @@ LinkedListType<elemType>::~LinkedListType()
 	destroyList();
 }
 
+
+template <class elemType>
+void LinkedListType<elemType>::print() const
+{
+	NodeType<elemType> *current;
+	while (current != NULL)
+	{
+		std::cout << current->info << std::endl;
+		current = current->link;
+	}
+}
 
 
 #endif /* LinkedList_h */
