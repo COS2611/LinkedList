@@ -13,43 +13,7 @@ struct NodeType
 
 
 
-template <class elemType>
-void insertFirst(NodeType<elemType> *&head, int newValue)
-{
-	NodeType<elemType> *newNode = new NodeType<elemType>();
-	newNode->info = newValue;
-	
-	// Point the new node to the head
-	newNode->link = head;
-	
-	// Set the new node as the head
-	head = newNode;
-}
 
-template <class elemType>
-void insertLast(NodeType<elemType> **head, int newValue)
-{
-	// create a new node with newValue
-	NodeType<elemType> *newNode = new NodeType<elemType>();
-	newNode->info = newValue;
-	newNode->link = NULL;
-	
-	if (*head == NULL) // if the list is empty
-	{
-		*head = newNode;
-		return;
-	}
-	
-	// find the last node
-	NodeType<elemType> *lastNode = *head;
-	while (lastNode->link != NULL)
-	{
-		lastNode = lastNode->link;
-	}
-	
-	// insert the new node after the last node
-	lastNode->link = newNode;
-}
 
 template <class elemType>
 void insertAfter(NodeType<elemType> *previous, int newValue)
@@ -71,14 +35,7 @@ void insertAfter(NodeType<elemType> *previous, int newValue)
 }
 
 
-template <class elemType>
-void deleteNode(NodeType<elemType> *head, NodeType<elemType> *theNode)
-{
-	NodeType<elemType> *p = head->link;
-	NodeType<elemType> *q = theNode;
-	p->link = q->link;
-	delete q;
-}
+
 
 
 template <class elemType>
@@ -141,6 +98,14 @@ NodeType<elemType> *buildListBackward()
 int main()
 {
 	LinkedListType<int> myList;
+	myList.insertLast(2);
+	myList.insertLast(15);
+	myList.insertLast(8);
+	myList.insertLast(24);
+	myList.insertLast(34);
+	myList.deleteNode(34);
+	myList.print();
+	
 	
 	return 0;
 }
