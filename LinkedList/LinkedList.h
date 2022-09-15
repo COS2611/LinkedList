@@ -25,6 +25,8 @@ public:
 	void insertFirst(const elemType& newItem);	// insert node at beginning
 	void insertLast(const elemType& newItem);	// insert node at the end
 	void deleteNode(const elemType& deleteItem);	// delete a node from the list
+	void buildListForward();
+	void buildListBackward();
 	
 	
 protected:
@@ -206,6 +208,35 @@ void LinkedListType<elemType>::deleteNode(const elemType& deleteItem)
 				std::cout << "The item to be deleted is not in the list." << std::endl;
 			}
 		}
+	}
+}
+
+
+
+template <class elemType>
+void LinkedListType<elemType>::buildListForward()
+{
+	elemType num {};
+	std::cout << "Enter a list of integers ending with -999:" << std::endl;
+	std::cin >> num;
+	while (num != -999)
+	{
+		insertLast(num);
+		std::cin >> num;
+	}
+}
+
+
+template <class elemType>
+void LinkedListType<elemType>::buildListBackward()
+{
+	elemType num {};
+	std::cout << "Enter a list of integers ending with -999:" << std::endl;
+	std::cin >> num;
+	while (num != -999)
+	{
+		insertFirst(num);
+		std::cin >> num;
 	}
 }
 
