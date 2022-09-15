@@ -1,6 +1,7 @@
 #include <iostream>
 
 
+/*
 template <class elemType>
 struct NodeType
 {
@@ -141,15 +142,12 @@ NodeType<elemType> *buildListBackward()
 	}
 	return first;
 }
+*/
+
 
 
 int main()
 {
-	// building a list backwards
-	NodeType<int> *first = buildListBackward<int>();
-	
-	std::cout << "\nThe linked list:" << std::endl;
-	printList(first);
 	
 	return 0;
 }
