@@ -27,14 +27,14 @@ public:
 	LinkedListIterator<elemType> begin();			// returns an iterator to the first node
 	LinkedListIterator<elemType> end();				// returns an iterator to the last node
 	
+	// overloaded assignment operator
+	const LinkedListType<elemType>& operator= (const LinkedListType<elemType>& otherList);
 	void copyList(const LinkedListType<elemType>& otherList);	// make an identical copy of the linked list
-
 	LinkedListType (const LinkedListType<elemType>& otherList);	// copy constructor
 
-	// TODO: implement overloaded assignment operator
-	const LinkedListType<elemType>& operator= (const LinkedListType<elemType>& otherList);
 	
 	// TODO: implement insertAfter
+	// TODO: implement method to exchange two nodes
 	
 	
 protected:
@@ -336,6 +336,17 @@ void LinkedListType<elemType>::copyList(const LinkedListType<elemType>& otherLis
 			current = current->link;
 		}
 	}
+}
+
+
+template <class elemType>
+const LinkedListType<elemType>& LinkedListType<elemType>::operator= (const LinkedListType<elemType>& otherList)
+{
+	if (this != &otherList)	// avoid self-copy
+	{
+		copyList(otherList);
+	}
+	return *this;
 }
 
 #endif /* LinkedList_h */

@@ -4,7 +4,7 @@
 template <class elemType>
 struct NodeType
 {
-	int info;
+	elemType info;
 	NodeType<elemType> *link;
 };
 
