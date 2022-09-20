@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		5E7A20DB28CCC48300C84BE2 /* LinkedList */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LinkedList; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E7A20DE28CCC48300C84BE2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5E8E6CA128DA097E0077562A /* UnorderedLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnorderedLinkedList.h; sourceTree = "<group>"; };
 		5EA2592028D2F741004A191E /* LinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
 		5EA2592128D3515B004A191E /* LinkedListIterator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkedListIterator.h; sourceTree = "<group>"; };
 		5EA2592228D356D7004A191E /* NodeType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeType.h; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 			children = (
 				5E7A20DE28CCC48300C84BE2 /* main.cpp */,
 				5EA2592028D2F741004A191E /* LinkedList.h */,
+				5E8E6CA128DA097E0077562A /* UnorderedLinkedList.h */,
 			);
 			path = LinkedList;
 			sourceTree = "<group>";
