@@ -72,7 +72,7 @@ void UnorderedLinkedList<elemType>::insertLast(const elemType& newItem)
 	else
 	{
 		this->last->link = newNode; 	// insert newNode after last
-		this->last = newNode;			// point last to newNode
+		this->last = newNode;			// make newNode the last node
 	}
 	this->count++;
 }
