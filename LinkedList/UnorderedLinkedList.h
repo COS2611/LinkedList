@@ -1,7 +1,6 @@
 #ifndef UnorderedLinkedList_h
 #define UnorderedLinkedList_h
 
-#include <string>
 #include "NodeType.h"
 #include "LinkedList.h"
 
@@ -10,10 +9,10 @@ template <class elemType>
 class UnorderedLinkedList : public LinkedListType<elemType>
 {
 public:
-	bool search (const elemType&) const;
-	void insertFirst(const elemType&);
-	void insertLast(const elemType&);
-	void deleteNode(const elemType&);
+	bool search(const elemType& searchItem) const;	// returns true if item is in the list
+	void insertFirst(const elemType& newItem);		// insert node at beginning
+	void insertLast(const elemType& newItem);		// insert node at the end
+	void deleteNode(const elemType& deleteItem);	// delete a node from the list
 	void buildListForward();
 	void buildListBackward();
 	
@@ -151,7 +150,7 @@ void UnorderedLinkedList<elemType>::buildListForward()
 	elemType num {};
 	std::cout << "Enter a list of elements ending with -999:" << std::endl;
 	std::cin >> num;
-	while (num != "-999")
+	while (num != -999)
 	{
 		insertLast(num);
 		std::cin >> num;
@@ -166,7 +165,7 @@ void UnorderedLinkedList<elemType>::buildListBackward()
 	elemType num {};
 	std::cout << "Enter a list of elements ending with -999:" << std::endl;
 	std::cin >> num;
-	while (num != "-999")
+	while (num != -999)
 	{
 		insertFirst(num);
 		std::cin >> num;

@@ -33,8 +33,7 @@ public:
 	virtual void insertFirst(const elemType& newItem) = 0;		// insert node at beginning
 	virtual void insertLast(const elemType& newItem) = 0;		// insert node at the end
 	virtual void deleteNode(const elemType& deleteItem) = 0;	// delete a node from the list
-	virtual void buildListForward() = 0;
-	virtual void buildListBackward() = 0;
+
 	
 protected:
 	int count;					// number of elements in the list
