@@ -1,24 +1,32 @@
 #include <iostream>
+#include <cstdlib>
 #include "UnorderedLinkedList.h"
 #include "OrderedLinkedList.h"
 
 
-int main()
+static void printList(const LinkedListType<int> &myNumbers)
 {
-	OrderedLinkedList<int> myNumbers;
-	
-	int searchNum;
-	int numArray[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-	
-	for (auto num : numArray)
-	{
-		myNumbers.insert(numArray[num - 1]);
-	}
-	
-	// Print the list
 	std::cout << "The list: ";
 	myNumbers.print();
 	std::cout << std::endl;
+}
+
+
+static void generateRandomList(OrderedLinkedList<int> &myNumbers)
+{
+	srand(static_cast<unsigned int>(time(0)));
+	for (size_t i = 0; i < 20; i++)
+	{
+		myNumbers.insert(rand() % 1000);
+	}
+}
+
+int main()
+{
+	OrderedLinkedList<int> myNumbers;
+	int searchNum;
+	generateRandomList(myNumbers);
+	printList(myNumbers);
 	
 	
 	// Search for an element
@@ -41,9 +49,31 @@ int main()
 	myNumbers.insert(insertNum);
 	
 	// Print the list
-	std::cout << "The list: ";
-	myNumbers.print();
-	std::cout << std::endl;
+	printList(myNumbers);
+	
+	// Delete an element
+	int deleteNum;
+	std::cout << "Enter a number to delete from the list: ";
+	std::cin >> deleteNum;
+	myNumbers.deleteNode(deleteNum);
+	
+	// Test insertFirst
+	{
+		int num;
+		std::cout << "Enter a number to add to the beginning of the list: ";
+		std::cin >> num;
+		myNumbers.insertFirst(num);
+		printList(myNumbers);
+	}
+	
+	// Test insertLast
+	{
+		int num;
+		std::cout << "Enter a number to add to the end of the list: ";
+		std::cin >> num;
+		myNumbers.insertLast(num);
+		printList(myNumbers);
+	}
 	
 
 	

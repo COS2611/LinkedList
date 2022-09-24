@@ -114,21 +114,87 @@ void OrderedLinkedList<elemType>::insert(const elemType& newItem)
 template <class elemType>
 void OrderedLinkedList<elemType>::insertFirst(const elemType& newItem)
 {
-	return;
+	insert(newItem);
 }
 
 
 template <class elemType>
 void OrderedLinkedList<elemType>::insertLast(const elemType& newItem)
 {
-	return;
+	insert(newItem);
 }
 
 
 template <class elemType>
 void OrderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
 {
-	return;
+	NodeType<elemType> *current = NULL;
+	NodeType<elemType> *trailCurrent = NULL;
+	bool found;
+	
+	if (this->first == NULL)	// Case 1: The list is initially empty
+	{
+		std::cout << "Cannot delete from an empty list." << std::endl;
+	}
+	
+	else
+	{
+		current = this->first;
+		found = false;
+		
+		while (current != NULL && !found)
+		{
+			if (current->info == deleteItem)
+			{
+				found = true;
+			}
+			else
+			{
+				trailCurrent = current;
+				current = current->link;
+			}
+		}
+		
+		// Case 4: The list is not empty, but the item to be deleted is not in the list.
+		if (current == NULL)
+		{
+			std::cout << "The item to be deleted is not in the list." << std::endl;
+		}
+		
+		else
+		{
+			if (current->info == deleteItem) // the item is in the list
+			{
+				// Case 2: The item to be deleted is contained in the first node
+				if (this->first == current)
+				{
+					this->first = this->first->link;
+					
+					if (this->first == NULL)
+					{
+						this->last = NULL;
+					}
+					delete current;
+				}
+				
+				else	// Case 3: The item to be deleted is somewhere else in the list.
+				{
+					trailCurrent->link = current->link;
+					if (current == this->last)
+					{
+						this->last = trailCurrent;
+					}
+					delete current;
+				}
+				this->count--;
+			}
+			
+			else	// Case 4: The list is not empty, but the item to be deleted is not in the list.
+			{
+				std::cout << "The item to be deleted is not in the list." << std::endl;
+			}
+		}
+	}
 }
 
 #endif /* OrderedLinkedList_h */

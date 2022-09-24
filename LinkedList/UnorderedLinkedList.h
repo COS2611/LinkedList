@@ -80,8 +80,8 @@ void UnorderedLinkedList<elemType>::insertLast(const elemType& newItem)
 template <class elemType>
 void UnorderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
 {
-	NodeType<elemType> *current;
-	NodeType<elemType> *trailCurrent;	// ptr before current ptr
+	NodeType<elemType> *current = NULL;
+	NodeType<elemType> *trailCurrent = NULL;	// ptr before current ptr
 	bool found = false;
 	
 	if (this->first == NULL)			// the list is empty
