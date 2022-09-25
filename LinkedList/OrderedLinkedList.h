@@ -14,6 +14,11 @@ public:
 	void insertLast(const elemType& newItem);		// insert node at the end
 	void deleteNode(const elemType& deleteItem);	// delete a node from the list
 	
+	
+	void mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> & list2);
+	//This function creates a new list by merging the elements
+	//of list1 and list2.
+	//Postcondition: first points to the merged list; list1 and list2 are empty
 };
 
 
@@ -195,6 +200,80 @@ void OrderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
 			}
 		}
 	}
+}
+
+
+template <class elemType>
+void OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2)
+{
+	NodeType<elemType> *current = NULL;
+	NodeType<elemType> *nodeL1 = list1.first;
+	NodeType<elemType> *nodeL2 = list2.first;
+	this->count = list1.count + list2.count;
+	
+	if (list1.first == NULL) // list 1 is empty
+	{
+		this->first = list2.first;
+		list2.first = NULL;
+		this->count = list2.count;
+	}
+	
+	else if (list2.first == NULL)	// list 2 is empty
+	{
+		this->first = list1.first;
+		list1.first = NULL;
+		this->count = list1.count;
+	}
+	
+	
+	// there is at least one non-empty list
+	else	// find the head node containing the smallest element
+	{
+		if (nodeL1->info <= nodeL2->info)
+		{
+			this->first = nodeL1;
+			nodeL1 = nodeL1->link;
+		}
+		else
+		{
+			this->first = nodeL2;
+			nodeL2 = nodeL2->link;
+		}
+	}
+	current = this->first;
+	
+	while (nodeL1 != NULL && nodeL2 != NULL)
+	{
+		if (nodeL1->info <= nodeL2->info)
+		{
+			current->link = nodeL1;
+			current = current->link;
+			nodeL1 = nodeL1->link;
+		}
+		else
+		{
+			current->link = nodeL2;
+			current = current->link;
+			nodeL2 = nodeL2->link;
+		}
+	}
+	
+	if (nodeL1 == NULL)	// list1 is exhausted first
+	{
+		current->link = nodeL2;
+	}
+	
+	else	// list2 is exhausted first
+	{
+		current->link = nodeL1;
+	}
+	this->count = list1.count + list2.count;
+	
+	// deallocate memory assigned to list1 and list2
+	list1.first = NULL;
+	list1.last = NULL;
+	list2.first = NULL;
+	list2.last = NULL;
 }
 
 #endif /* OrderedLinkedList_h */

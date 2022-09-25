@@ -4,92 +4,43 @@
 #include "OrderedLinkedList.h"
 
 
-static void printList(const LinkedListType<int> &myNumbers)
-{
-	std::cout << "The list: ";
-	myNumbers.print();
-	std::cout << std::endl;
-}
-
-
-static void generateRandomList(OrderedLinkedList<int> &myNumbers)
+static void generateRandomList(OrderedLinkedList<int> &list)
 {
 	srand(static_cast<unsigned int>(time(0)));
-	for (size_t i = 0; i < 20; i++)
+	for (size_t i = 0; i < 10; i++)
 	{
-		myNumbers.insert(rand() % 1000);
+		list.insert(rand() % 50);
 	}
 }
+
 
 int main()
 {
-	OrderedLinkedList<int> myNumbers;
-	int searchNum;
-	generateRandomList(myNumbers);
-	printList(myNumbers);
+	OrderedLinkedList<int> list1;
+	OrderedLinkedList<int> list2;
+	
+	generateRandomList(list1);
+	std::cout << "List1: ";
+	list1.print();
+	std::cout << std::endl;
+	
+	list2.insert(6);
+	list2.insert(108);
+	list2.insert(64);
+	list2.insert(17);
+	list2.insert(-41);
+	std::cout << "List2: ";
+	list2.print();
+	std::cout << std::endl;
 	
 	
-	// Search for an element
-	std::cout << "Enter a number to search for: ";
-	std::cin >> searchNum;
-	if (myNumbers.search(searchNum))
-	{
-		std::cout << searchNum << " was found in the list." << std::endl;
-	}
-	else
-	{
-		std::cout << searchNum << " is not in the list." << std::endl;
-	}
-	
-	
-	// Insert an element
-	int insertNum;
-	std::cout << "Enter a number to insert: ";
-	std::cin >> insertNum;
-	myNumbers.insert(insertNum);
-	
-	// Print the list
-	printList(myNumbers);
-	
-	// Delete an element
-	int deleteNum;
-	std::cout << "Enter a number to delete from the list: ";
-	std::cin >> deleteNum;
-	myNumbers.deleteNode(deleteNum);
-	
-	// Test insertFirst
-	{
-		int num;
-		std::cout << "Enter a number to add to the beginning of the list: ";
-		std::cin >> num;
-		myNumbers.insertFirst(num);
-		printList(myNumbers);
-	}
-	
-	// Test insertLast
-	{
-		int num;
-		std::cout << "Enter a number to add to the end of the list: ";
-		std::cin >> num;
-		myNumbers.insertLast(num);
-		printList(myNumbers);
-	}
-	
+	// Test mergeLists
+	OrderedLinkedList<int> newList;
+	newList.mergeLists(list1, list2);
+	std::cout << "The merged list: ";
+	newList.print();
+	std::cout << std::endl;
 
-	
-// TODO: test buildListForward with std::string
-//	UnorderedLinkedList<std::string> myList;
-//	myList.buildListForward();
-//	std::cout << std::endl;
-//	std::cout << "The original list: ";
-//	myList.print();
-
-//	// make a copy of myList using copy constructor
-//	UnorderedLinkedList<std::string> yourList {myList};
-//	std::cout << "\nSucessfully copied the list." << std::endl;
-//	std::cout << "\nYour list: ";
-//	yourList.print();
-//	std::cout << std::endl;
 
 	return 0;
 }

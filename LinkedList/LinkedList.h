@@ -20,7 +20,8 @@ public:
 	elemType back() const;							// returns the last node's info
 	LinkedListIterator<elemType> begin();			// returns an iterator to the first node
 	LinkedListIterator<elemType> end();				// returns an iterator to the last node
-
+	
+	// TODO: create a method to avoid insertion of duplicate elements
 	
 	// overloaded assignment operator
 	const LinkedListType<elemType>& operator= (const LinkedListType<elemType>& otherList);
