@@ -20,6 +20,10 @@ public:
 	// TODO: implement insertAfter
 	// TODO: implement method to exchange two nodes
 	
+	void shareList(const UnorderedLinkedList<elemType>& Orig, UnorderedLinkedList<elemType>& listA, UnorderedLinkedList<elemType>& listB);
+	// Copies all elements in an even index position to listA
+	// and all elements in an odd index position to listB
+	
 	
 };
 
@@ -192,5 +196,39 @@ void insertAfter(NodeType<elemType> *previous, int newValue)
 	newNode->link = previous->link;
 	previous->link = newNode;
 } */
+
+
+template <class elemType>
+void UnorderedLinkedList<elemType>::shareList(const UnorderedLinkedList<elemType>& Orig, UnorderedLinkedList<elemType>& listA, UnorderedLinkedList<elemType>& listB)
+{
+	
+	// Case 1: The original list is empty
+	if (!Orig.first)
+	{
+		std::cout << "The original list is empty.\n";
+	}
+	
+	else
+	{
+		NodeType<elemType> *current = Orig.first;
+		NodeType<elemType> *headA = listA.first;
+		NodeType<elemType> *headB = listB.first;
+		unsigned int currentIndex = 0;
+		
+		while (current)
+		{
+			if (currentIndex % 2 == 0)	// even index position
+			{
+				listA.insertLast(current->info);
+			}
+			else	// odd index position
+			{
+				listB.insertLast(current->info);
+			}
+			current = current->link;
+			currentIndex++;
+		}
+	}
+}
 
 #endif /* UnorderedLinkedList_h */
