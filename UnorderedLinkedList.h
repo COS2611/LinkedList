@@ -28,6 +28,11 @@ public:
 	// inserts a node with a given value after the occurrence
 	// of a specified value in the list.
 	
+	void divideAt(LinkedListType<elemType>& subList, int pos);
+	// divides a given list into two sublists at a given position
+	// all nodes from the given position are moved from the
+	// list that calls this method to the subList passed as an argument
+	
 	
 };
 
@@ -256,6 +261,46 @@ void UnorderedLinkedList<elemType>::insertAfter(const elemType existingValue, co
 			}
 			current = current->link;
 		}
+	}
+}
+
+
+template <class elemType>
+void UnorderedLinkedList<elemType>::divideAt(LinkedListType<elemType>& subList, int pos)
+{
+	unsigned int currentIndex = 0;
+	NodeType<elemType> *mainHead = this->first;	// original list head
+	NodeType<elemType> *current = mainHead;		// ptr to traverse original list
+	NodeType<elemType> *mainTail = NULL;		// last node of the original list
+	NodeType<elemType> *subListHead = NULL;		// sublist head
+	NodeType<elemType> *subListPtr = NULL;		// ptr to traverse sublist
+	
+	if (!this->first)	// the original list is empty
+	{
+		std::cout << "The original list is empty.\n";
+	}
+	
+	else
+	{
+		while (current && pos >= 1)
+		{
+			if (currentIndex + 1 == pos)
+			{
+				subListHead = current->link;
+				subListPtr = subListHead;
+				mainTail = current;
+			}
+			
+			if (subListPtr)
+			{
+				subList.insertLast(subListPtr->info);
+				subListPtr = subListPtr->link;
+			}
+			
+			current = current->link;
+			currentIndex++;
+		}
+		mainTail->link = NULL;
 	}
 }
 

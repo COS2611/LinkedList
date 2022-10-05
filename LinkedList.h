@@ -31,13 +31,14 @@ public:
 	
 	
 	// TODO: create a method to avoid insertion of duplicate elements
+	// TODO: overload < and > operators for generic elemType
 	
 	// overloaded assignment operator
 	const LinkedListType<elemType>& operator= (const LinkedListType<elemType>& otherList);
 	void copyList(const LinkedListType<elemType>& otherList);	// make an identical copy of the linked list
 	LinkedListType (const LinkedListType<elemType>& otherList);	// copy constructor
 	
-	// TODO: implement evenOddPArtition
+	// TODO: implement evenOddPartition
 	NodeType<elemType> *evenOddIndexPartition(NodeType<elemType> *head);
 	// Arranges the list such that all the even index nodes appear before the odd index nodes
 	
