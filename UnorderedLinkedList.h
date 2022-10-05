@@ -24,6 +24,10 @@ public:
 	// Copies all elements in an even index position to listA
 	// and all elements in an odd index position to listB
 	
+	void insertAfter(const elemType existingValue, const elemType newValue);
+	// inserts a node with a given value after the occurrence
+	// of a specified value in the list.
+	
 	
 };
 
@@ -211,8 +215,6 @@ void UnorderedLinkedList<elemType>::shareList(const UnorderedLinkedList<elemType
 	else
 	{
 		NodeType<elemType> *current = Orig.first;
-		NodeType<elemType> *headA = listA.first;
-		NodeType<elemType> *headB = listB.first;
 		unsigned int currentIndex = 0;
 		
 		while (current)
@@ -227,6 +229,32 @@ void UnorderedLinkedList<elemType>::shareList(const UnorderedLinkedList<elemType
 			}
 			current = current->link;
 			currentIndex++;
+		}
+	}
+}
+
+
+template <class elemType>
+void UnorderedLinkedList<elemType>::insertAfter(const elemType existingValue, const elemType newValue)
+{
+	NodeType<elemType> *current = this->first;
+	NodeType<elemType> *newNode = new NodeType<elemType>(newValue);
+	
+	if (!this->first)	// if list is empty
+	{
+		this->first = newNode;
+	}
+	
+	else
+	{
+		while (current)
+		{
+			if (current->info == existingValue)
+			{
+				newNode->link = current->link;
+				current->link = newNode;
+			}
+			current = current->link;
 		}
 	}
 }

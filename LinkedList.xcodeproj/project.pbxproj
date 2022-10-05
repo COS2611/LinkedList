@@ -46,9 +46,12 @@
 		5E7A20D228CCC48300C84BE2 = {
 			isa = PBXGroup;
 			children = (
+				5E7A20DE28CCC48300C84BE2 /* main.cpp */,
+				5EA2592028D2F741004A191E /* LinkedList.h */,
+				5E8E6CA128DA097E0077562A /* UnorderedLinkedList.h */,
+				5E8E6CA228DB69910077562A /* OrderedLinkedList.h */,
 				5EA2592228D356D7004A191E /* NodeType.h */,
 				5EA2592128D3515B004A191E /* LinkedListIterator.h */,
-				5E7A20DD28CCC48300C84BE2 /* LinkedList */,
 				5E7A20DC28CCC48300C84BE2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,17 +62,6 @@
 				5E7A20DB28CCC48300C84BE2 /* LinkedList */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		5E7A20DD28CCC48300C84BE2 /* LinkedList */ = {
-			isa = PBXGroup;
-			children = (
-				5E7A20DE28CCC48300C84BE2 /* main.cpp */,
-				5EA2592028D2F741004A191E /* LinkedList.h */,
-				5E8E6CA128DA097E0077562A /* UnorderedLinkedList.h */,
-				5E8E6CA228DB69910077562A /* OrderedLinkedList.h */,
-			);
-			path = LinkedList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
