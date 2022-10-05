@@ -24,6 +24,8 @@ public:
 	int length() const;								// returns the number of nodes in the list
 	elemType front() const;							// returns the first node's info
 	elemType back() const;							// returns the last node's info
+	elemType max() const;	 						// returns the largest element in the list
+	elemType min() const;							// returns the smallest element in the list
 	LinkedListIterator<elemType> begin();			// returns an iterator to the first node
 	LinkedListIterator<elemType> end();				// returns an iterator to the last node
 	
@@ -123,6 +125,58 @@ elemType LinkedListType<elemType>::back() const
 {
 	assert(last != NULL);
 	return last->info;
+}
+
+
+template <class elemType>
+elemType LinkedListType<elemType>::max() const
+{
+	NodeType<elemType> *current = this->first;
+	elemType largestElement = current->info;
+	
+	if (!this->first)
+	{
+		return NULL;
+	}
+	
+	else
+	{
+		while(current)
+		{
+			if (current->info > largestElement)
+			{
+				largestElement = current->info;
+			}
+			current = current->link;
+		}
+	}
+	return largestElement;
+}
+
+
+template <class elemType>
+elemType LinkedListType<elemType>::min() const
+{
+	NodeType<elemType> *current = this->first;
+	elemType smallestElement = current->info;
+	
+	if (!this->first)
+	{
+		return NULL;
+	}
+	
+	else
+	{
+		while(current)
+		{
+			if (current->info < smallestElement)
+			{
+				smallestElement = current->info;
+			}
+			current = current->link;
+		}
+	}
+	return smallestElement;
 }
 
 
