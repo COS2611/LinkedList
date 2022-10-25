@@ -5,27 +5,30 @@
 
 int main()
 {
-	//	evenOddIndexPartition(myList.first);	// FIXME: need access to head node
-	
+	/// Test Even-Odd partition based on index
+//	evenOddIndexPartition(myList.first);	// FIXME: need access to head node
+
 	UnorderedLinkedList<int> myList;
 	UnorderedLinkedList<int> subList;
-	
+	UnorderedLinkedList<int> listA;
+	UnorderedLinkedList<int> listB;
+
 	myList.insertLast(34);
 	myList.insertLast(65);
 	myList.insertLast(27);
 	myList.insertLast(89);
 	myList.insertLast(12);
-	
+
 	/// Test insertAfter
 	myList.print();
 	std::cout << std::endl;
-	
+
 	/// test max()
 	std::cout << "The largest element in the list is " << myList.max() << std::endl;
-	
+
 	/// test min()
 	std::cout << "The smallest element in the list is " << myList.min() << std::endl;
-	
+
 	/// test divideAt
 	std::cout << "Before dividing:\n";
 	std::cout << "My list: ";
@@ -43,5 +46,27 @@ int main()
 	subList.print();
 	std::cout << std::endl;
 
+
+	/// Test shareLIst
+	myList.initializeList();
+	myList.insertLast(5);
+	myList.insertLast(1);
+	myList.insertLast(3);
+	myList.insertLast(7);
+	myList.insertLast(3);
+	myList.shareList(myList, listA, listB);
+
+	std::cout << "original list: ";
+	myList.print();
+	std::cout << std::endl;
+
+	std::cout << "Even index elements: ";
+	listA.print();
+	std::cout << std::endl;
+
+	std::cout << "Odd index elements: ";
+	listB.print();
+	std::cout << std::endl;
+	
 	return 0;
 }
