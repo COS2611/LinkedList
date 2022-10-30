@@ -19,6 +19,7 @@ public:
 	
 	// TODO: implement insertAfter
 	// TODO: implement method to exchange two nodes
+	void exchangeByIndex(const int first, const int second);
 	
 	void shareList(const UnorderedLinkedList<elemType>& Orig, UnorderedLinkedList<elemType>& listA, UnorderedLinkedList<elemType>& listB);
 	// Copies all elements in an even index position to listA
@@ -303,5 +304,35 @@ void UnorderedLinkedList<elemType>::divideAt(LinkedListType<elemType>& subList, 
 		mainTail->link = NULL;
 	}
 }
+
+
+//template <class elemType>
+//void UnorderedLinkedList<elemType>::exchangeByIndex(const int first, const int second)
+//{
+//	elemType *head = first;	// ptr to the head of the linked list
+//	elemType *current = head;	// ptr to traverse the list
+//	elemType *n1 = NULL;	// ptr to the node at the index specified by the first operand
+//	elemType *n2 = NULL;	// ptr to the node at the index specified by the second operand
+//	unsigned int currentPosition = 0;	// need to keep track of index for index-based node swap
+//
+//	while (current->link)
+//	{
+//		// traverse the list and find the position for n1
+//		if (currentPosition == first - 1)
+//		{
+//			n1 = current;
+//		}
+//
+//		// traverse the list and find the position for n2
+//		if (currentPosition == second - 1)
+//		{
+//			n2 = current;
+//		}
+//		current = current->link;
+//		currentPosition++;
+//	}
+//	n2->link = n1->link;
+//
+//}
 
 #endif /* UnorderedLinkedList_h */

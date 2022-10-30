@@ -20,6 +20,8 @@ int main()
 	myList.insertLast(12);
 
 	/// Test insertAfter
+	myList.insertAfter(65, 100);
+	myList.insertAfter(1000, 222);
 	myList.print();
 	std::cout << std::endl;
 
@@ -67,6 +69,7 @@ int main()
 	std::cout << "Odd index elements: ";
 	listB.print();
 	std::cout << std::endl;
+	
 	
 	return 0;
 }
