@@ -20,6 +20,7 @@ public:
 	// TODO: implement insertAfter
 	// TODO: implement method to exchange two nodes
 	void exchangeByIndex(const int first, const int second);
+	void exchangeTwoFour();
 	
 	void shareList(const UnorderedLinkedList<elemType>& Orig, UnorderedLinkedList<elemType>& listA, UnorderedLinkedList<elemType>& listB);
 	// Copies all elements in an even index position to listA
@@ -187,27 +188,6 @@ void UnorderedLinkedList<elemType>::buildListBackward()
 }
 
 
-/*
-template <class elemType>
-void insertAfter(NodeType<elemType> *previous, int newValue)
-{
-	// check if the previous node is NULL
-	if (previous == NULL)
-	{
-		std::cout << "Previous cannot be NULL" << std::endl;
-		return;
-	}
-	
-	// create a new node
-	NodeType<elemType> *newNode = new NodeType<elemType>();
-	newNode->info = newValue;
-	
-	// insert the new node after the previous node
-	newNode->link = previous->link;
-	previous->link = newNode;
-} */
-
-
 template <class elemType>
 void UnorderedLinkedList<elemType>::shareList(const UnorderedLinkedList<elemType>& Orig, UnorderedLinkedList<elemType>& listA, UnorderedLinkedList<elemType>& listB)
 {
@@ -306,33 +286,80 @@ void UnorderedLinkedList<elemType>::divideAt(LinkedListType<elemType>& subList, 
 }
 
 
+template <class elemType>
+void UnorderedLinkedList<elemType>::exchangeByIndex(const int first, const int second)
+{
+	// FIXME: this is resulting in an endless cycle
+	NodeType<elemType> *head = this->first;	// ptr to the head of the linked list
+	NodeType<elemType> *current = head;	// ptr to traverse the list
+	NodeType<elemType> *n1prev = NULL;	// ptr to the node before first
+	NodeType<elemType> *n2prev = NULL;	// ptr to the node before second
+	NodeType<elemType> *n1 = NULL;
+	NodeType<elemType> *n2 = NULL;
+	unsigned int currentPosition = 0;	// need to keep track of index for index-based node swap
+	
+	if (!head)
+	{
+		return;
+	}
+	
+	// assign n1 and n2 pointers to their respective positions
+	while (current->link)
+	{
+		// traverse the list and find the position for n1
+		// index starts at zero and we want the node before the node at position
+		// so we are looking for the position - 2
+		if (currentPosition == first - 2)
+		{
+			n1prev = current;
+			n1 = n1prev->link;	// keep track of n1
+		}
+
+		// traverse the list and find the position for n2
+		if (currentPosition == second - 2)
+		{
+			n2prev = current;
+			n2 = n2prev->link;	// keep track of n2
+		}
+		current = current->link;
+		currentPosition++;
+	}
+	
+	// swap n1 and n2
+	n1prev->link = n2;
+	n2->link = n1->link;
+	n2->link->link->link->link = n1;
+	n1->link = n2->link;
+
+}
+
+
+/// hardcoded examples for exchange(2,4)
+
+// Method 1:
 //template <class elemType>
-//void UnorderedLinkedList<elemType>::exchangeByIndex(const int first, const int second)
+//void UnorderedLinkedList<elemType>::exchangeTwoFour()
 //{
-//	elemType *head = first;	// ptr to the head of the linked list
-//	elemType *current = head;	// ptr to traverse the list
-//	elemType *n1 = NULL;	// ptr to the node at the index specified by the first operand
-//	elemType *n2 = NULL;	// ptr to the node at the index specified by the second operand
-//	unsigned int currentPosition = 0;	// need to keep track of index for index-based node swap
-//
-//	while (current->link)
-//	{
-//		// traverse the list and find the position for n1
-//		if (currentPosition == first - 1)
-//		{
-//			n1 = current;
-//		}
-//
-//		// traverse the list and find the position for n2
-//		if (currentPosition == second - 1)
-//		{
-//			n2 = current;
-//		}
-//		current = current->link;
-//		currentPosition++;
-//	}
-//	n2->link = n1->link;
-//
+//	NodeType<elemType> *head = this->first;
+//	NodeType<elemType> *temp = head->link;
+//	head->link = temp->link->link;
+//	temp->link->link = NULL;
+//	head->link->link = temp->link;
+//	temp->link = NULL;
+//	head->link->link->link = temp;
 //}
+
+
+// Method 2:
+template <class elemType>
+void UnorderedLinkedList<elemType>::exchangeTwoFour()
+{
+	NodeType<elemType> *head = this->first;
+	NodeType<elemType> *temp = head->link;
+	head->link = temp->link->link;
+	head->link->link = temp->link;
+	temp->link->link = temp;
+	temp->link = NULL;
+}
 
 #endif /* UnorderedLinkedList_h */
