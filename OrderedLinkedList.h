@@ -15,12 +15,12 @@ public:
 	void deleteNode(const elemType& deleteItem);	// delete a node from the list
 	
 	
-//	void mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> & list2);
-	//This function creates a new list by merging the elements
-	//of list1 and list2.
-	//Postcondition: first points to the merged list; list1 and list2 are empty
+	void mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2);
+//	This function creates a new list by merging the elements
+//	of list1 and list2.
+//	Postcondition: first points to the merged list; list1 and list2 are empty
 	
-	OrderedLinkedList<elemType> *mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2);
+//	OrderedLinkedList<elemType> *mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2);
 	// same as void mergeLists, but this method returns the head of the new list
 };
 
@@ -206,46 +206,118 @@ void OrderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
 }
 
 
+template <class elemType>
+void OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2)
+{
+	NodeType<elemType> *current = NULL;
+	NodeType<elemType> *nodeL1 = list1.first;
+	NodeType<elemType> *nodeL2 = list2.first;
+	this->count = list1.count + list2.count;
+
+	if (list1.first == NULL) // list 1 is empty
+	{
+		this->first = list2.first;
+		list2.first = NULL;
+		this->count = list2.count;
+	}
+
+	else if (list2.first == NULL)	// list 2 is empty
+	{
+		this->first = list1.first;
+		list1.first = NULL;
+		this->count = list1.count;
+	}
+
+
+	// there is at least one non-empty list
+	else	// find the head node containing the smallest element
+	{
+		if (nodeL1->info <= nodeL2->info)
+		{
+			this->first = nodeL1;
+			nodeL1 = nodeL1->link;
+		}
+		else
+		{
+			this->first = nodeL2;
+			nodeL2 = nodeL2->link;
+		}
+	}
+	current = this->first;
+
+	while (nodeL1 != NULL && nodeL2 != NULL)
+	{
+		if (nodeL1->info <= nodeL2->info)
+		{
+			current->link = nodeL1;
+			current = current->link;
+			nodeL1 = nodeL1->link;
+		}
+		else
+		{
+			current->link = nodeL2;
+			current = current->link;
+			nodeL2 = nodeL2->link;
+		}
+	}
+
+	if (nodeL1 == NULL)	// list1 is exhausted first
+	{
+		current->link = nodeL2;
+	}
+
+	else	// list2 is exhausted first
+	{
+		current->link = nodeL1;
+	}
+	this->count = list1.count + list2.count;
+
+	// deallocate memory assigned to list1 and list2
+	list1.first = NULL;
+	list1.last = NULL;
+	list2.first = NULL;
+	list2.last = NULL;
+}
+
+
 //template <class elemType>
-//void OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2)
+//OrderedLinkedList<elemType> *OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2)
 //{
+//	NodeType<elemType> *newHead = NULL;
 //	NodeType<elemType> *current = NULL;
 //	NodeType<elemType> *nodeL1 = list1.first;
 //	NodeType<elemType> *nodeL2 = list2.first;
-//	this->count = list1.count + list2.count;
 //
-//	if (list1.first == NULL) // list 1 is empty
+//	if (list1.isEmpty())
 //	{
-//		this->first = list2.first;
+//		newHead = list2.first;
 //		list2.first = NULL;
-//		this->count = list2.count;
 //	}
 //
-//	else if (list2.first == NULL)	// list 2 is empty
+//	else if (list2.isEmpty())
 //	{
-//		this->first = list1.first;
+//		newHead = list1.first;
 //		list1.first = NULL;
-//		this->count = list1.count;
 //	}
 //
-//
-//	// there is at least one non-empty list
-//	else	// find the head node containing the smallest element
+//	else
 //	{
+//		// get the first node of the new list
 //		if (nodeL1->info <= nodeL2->info)
 //		{
-//			this->first = nodeL1;
+//			newHead = nodeL1;
 //			nodeL1 = nodeL1->link;
 //		}
+//
 //		else
 //		{
-//			this->first = nodeL2;
+//			newHead = nodeL2;
 //			nodeL2 = nodeL2->link;
 //		}
+//		current = this->first;
 //	}
-//	current = this->first;
 //
-//	while (nodeL1 != NULL && nodeL2 != NULL)
+//	while (nodeL1 && nodeL2)
 //	{
 //		if (nodeL1->info <= nodeL2->info)
 //		{
@@ -253,6 +325,7 @@ void OrderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
 //			current = current->link;
 //			nodeL1 = nodeL1->link;
 //		}
+//
 //		else
 //		{
 //			current->link = nodeL2;
@@ -261,96 +334,23 @@ void OrderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
 //		}
 //	}
 //
-//	if (nodeL1 == NULL)	// list1 is exhausted first
+//	if (!nodeL1)	// list 1 exhausts first
 //	{
 //		current->link = nodeL2;
 //	}
 //
-//	else	// list2 is exhausted first
+//	else	// list 2 exhausts first
 //	{
 //		current->link = nodeL1;
 //	}
-//	this->count = list1.count + list2.count;
 //
-//	// deallocate memory assigned to list1 and list2
 //	list1.first = NULL;
 //	list1.last = NULL;
 //	list2.first = NULL;
 //	list2.last = NULL;
+//
+//	return newHead;
+//	// FIXME: build error when tyring to return newHead
 //}
-
-
-template <class elemType>
-OrderedLinkedList<elemType> *OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2)
-{
-	NodeType<elemType> *newHead = NULL;
-	NodeType<elemType> *current = NULL;
-	NodeType<elemType> *nodeL1 = list1.first;
-	NodeType<elemType> *nodeL2 = list2.first;
-	
-	if (list1.isEmpty())
-	{
-		newHead = list2.first;
-		list2.first = NULL;
-	}
-	
-	else if (list2.isEmpty())
-	{
-		newHead = list1.first;
-		list1.first = NULL;
-	}
-	
-	else
-	{
-		// get the first node of the new list
-		if (nodeL1->info <= nodeL2->info)
-		{
-			newHead = nodeL1;
-			nodeL1 = nodeL1->link;
-		}
-		
-		else
-		{
-			newHead = nodeL2;
-			nodeL2 = nodeL2->link;
-		}
-		current = this->first;
-	}
-	
-	while (nodeL1 && nodeL2)
-	{
-		if (nodeL1->info <= nodeL2->info)
-		{
-			current->link = nodeL1;
-			current = current->link;
-			nodeL1 = nodeL1->link;
-		}
-		
-		else
-		{
-			current->link = nodeL2;
-			current = current->link;
-			nodeL2 = nodeL2->link;
-		}
-	}
-	
-	if (!nodeL1)	// list 1 exhausts first
-	{
-		current->link = nodeL2;
-	}
-	
-	else	// list 2 exhausts first
-	{
-		current->link = nodeL1;
-	}
-	
-	list1.first = NULL;
-	list1.last = NULL;
-	list2.first = NULL;
-	list2.last = NULL;
-	
-	return newHead;
-	// FIXME: build error when tyring to return newHead
-}
 
 #endif /* OrderedLinkedList_h */
