@@ -5,14 +5,14 @@
 #include "LinkedList.h"
 
 
-template <class elemType>
-class UnorderedLinkedList : public LinkedListType<elemType>
+template <class Type>
+class UnorderedLinkedList : public LinkedListType<Type>
 {
 public:
-	bool search(const elemType& searchItem) const;	// returns true if item is in the list
-	void insertFirst(const elemType& newItem);		// insert node at beginning
-	void insertLast(const elemType& newItem);		// insert node at the end
-	void deleteNode(const elemType& deleteItem);	// delete a node from the list
+	bool search(const Type& searchItem) const;	// returns true if item is in the list
+	void insertFirst(const Type& newItem);		// insert node at beginning
+	void insertLast(const Type& newItem);		// insert node at the end
+	void deleteNode(const Type& deleteItem);	// delete a node from the list
 	void buildListForward();
 	void buildListBackward();
 	
@@ -22,15 +22,15 @@ public:
 	void exchangeByIndex(const int first, const int second);
 	void exchangeTwoFour();
 	
-	void shareList(const UnorderedLinkedList<elemType>& Orig, UnorderedLinkedList<elemType>& listA, UnorderedLinkedList<elemType>& listB);
+	void shareList(const UnorderedLinkedList<Type>& Orig, UnorderedLinkedList<Type>& listA, UnorderedLinkedList<Type>& listB);
 	// Copies all elements in an even index position to listA
 	// and all elements in an odd index position to listB
 	
-	void insertAfter(const elemType existingValue, const elemType newValue);
+	void insertAfter(const Type existingValue, const Type newValue);
 	// inserts a node with a given value after the occurrence
 	// of a specified value in the list.
 	
-	void divideAt(LinkedListType<elemType>& subList, int pos);
+	void divideAt(LinkedListType<Type>& subList, int pos);
 	// divides a given list into two sublists at a given position
 	// all nodes from the given position are moved from the
 	// list that calls this method to the subList passed as an argument
@@ -38,10 +38,10 @@ public:
 	
 };
 
-template <class elemType>
-bool UnorderedLinkedList<elemType>::search(const elemType& searchItem) const
+template <class Type>
+bool UnorderedLinkedList<Type>::search(const Type& searchItem) const
 {
-	NodeType<elemType> *current = this->first;
+	NodeType<Type> *current = this->first;
 	bool found = false;
 	
 	while (current != NULL && !found)
@@ -59,10 +59,10 @@ bool UnorderedLinkedList<elemType>::search(const elemType& searchItem) const
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::insertFirst(const elemType& newItem)
+template <class Type>
+void UnorderedLinkedList<Type>::insertFirst(const Type& newItem)
 {
-	NodeType<elemType> *newNode = new NodeType<elemType>;
+	NodeType<Type> *newNode = new NodeType<Type>;
 	newNode->info = newItem;
 	newNode->link = this->first;	// Point the new node to the head
 	this->first = newNode;			// Set the new node as the head
@@ -70,10 +70,10 @@ void UnorderedLinkedList<elemType>::insertFirst(const elemType& newItem)
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::insertLast(const elemType& newItem)
+template <class Type>
+void UnorderedLinkedList<Type>::insertLast(const Type& newItem)
 {
-	NodeType<elemType> *newNode = new NodeType<elemType>;
+	NodeType<Type> *newNode = new NodeType<Type>;
 	newNode->info = newItem;
 	newNode->link = NULL;
 	
@@ -92,11 +92,11 @@ void UnorderedLinkedList<elemType>::insertLast(const elemType& newItem)
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
+template <class Type>
+void UnorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
 {
-	NodeType<elemType> *current = NULL;
-	NodeType<elemType> *trailCurrent = NULL;	// ptr before current ptr
+	NodeType<Type> *current = NULL;
+	NodeType<Type> *trailCurrent = NULL;	// ptr before current ptr
 	bool found = false;
 	
 	if (this->first == NULL)			// the list is empty
@@ -158,11 +158,11 @@ void UnorderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::buildListForward()
+template <class Type>
+void UnorderedLinkedList<Type>::buildListForward()
 {
 	// TODO: update buildListForward() to work with all types
-	elemType num {};
+	Type num {};
 	std::cout << "Enter a list of elements ending with -999:" << std::endl;
 	std::cin >> num;
 	while (num != -999)
@@ -173,11 +173,11 @@ void UnorderedLinkedList<elemType>::buildListForward()
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::buildListBackward()
+template <class Type>
+void UnorderedLinkedList<Type>::buildListBackward()
 {
 	// TODO: update buildListBackward() to work with all types
-	elemType num {};
+	Type num {};
 	std::cout << "Enter a list of elements ending with -999:" << std::endl;
 	std::cin >> num;
 	while (num != -999)
@@ -188,9 +188,11 @@ void UnorderedLinkedList<elemType>::buildListBackward()
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::shareList(const UnorderedLinkedList<elemType>& Orig, UnorderedLinkedList<elemType>& listA, UnorderedLinkedList<elemType>& listB)
+template <class Type>
+void UnorderedLinkedList<Type>::shareList(const UnorderedLinkedList<Type>& Orig, UnorderedLinkedList<Type>& listA, UnorderedLinkedList<Type>& listB)
 {
+	NodeType<Type> *current = Orig.first;
+	unsigned int currentPosition = 0;
 	
 	// Case 1: The original list is empty
 	if (!Orig.first)
@@ -200,7 +202,7 @@ void UnorderedLinkedList<elemType>::shareList(const UnorderedLinkedList<elemType
 	
 	else
 	{
-		NodeType<elemType> *current = Orig.first;
+		NodeType<Type> *current = Orig.first;
 		unsigned int currentIndex = 0;
 		
 		while (current)
@@ -220,11 +222,11 @@ void UnorderedLinkedList<elemType>::shareList(const UnorderedLinkedList<elemType
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::insertAfter(const elemType existingValue, const elemType newValue)
+template <class Type>
+void UnorderedLinkedList<Type>::insertAfter(const Type existingValue, const Type newValue)
 {
-	NodeType<elemType> *current = this->first;
-	NodeType<elemType> *newNode = new NodeType<elemType>(newValue);
+	NodeType<Type> *current = this->first;
+	NodeType<Type> *newNode = new NodeType<Type>(newValue);
 	
 	if (!this->first)	// if list is empty
 	{
@@ -246,15 +248,15 @@ void UnorderedLinkedList<elemType>::insertAfter(const elemType existingValue, co
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::divideAt(LinkedListType<elemType>& subList, int pos)
+template <class Type>
+void UnorderedLinkedList<Type>::divideAt(LinkedListType<Type>& subList, int pos)
 {
 	unsigned int currentIndex = 0;
-	NodeType<elemType> *mainHead = this->first;	// original list head
-	NodeType<elemType> *current = mainHead;		// ptr to traverse original list
-	NodeType<elemType> *mainTail = NULL;		// last node of the original list
-	NodeType<elemType> *subListHead = NULL;		// sublist head
-	NodeType<elemType> *subListPtr = NULL;		// ptr to traverse sublist
+	NodeType<Type> *mainHead = this->first;	// original list head
+	NodeType<Type> *current = mainHead;		// ptr to traverse original list
+	NodeType<Type> *mainTail = NULL;		// last node of the original list
+	NodeType<Type> *subListHead = NULL;		// sublist head
+	NodeType<Type> *subListPtr = NULL;		// ptr to traverse sublist
 	
 	if (!this->first)	// the original list is empty
 	{
@@ -286,16 +288,16 @@ void UnorderedLinkedList<elemType>::divideAt(LinkedListType<elemType>& subList, 
 }
 
 
-template <class elemType>
-void UnorderedLinkedList<elemType>::exchangeByIndex(const int first, const int second)
+template <class Type>
+void UnorderedLinkedList<Type>::exchangeByIndex(const int first, const int second)
 {
 	// FIXME: this is resulting in an endless cycle
-	NodeType<elemType> *head = this->first;	// ptr to the head of the linked list
-	NodeType<elemType> *current = head;	// ptr to traverse the list
-	NodeType<elemType> *n1prev = NULL;	// ptr to the node before first
-	NodeType<elemType> *n2prev = NULL;	// ptr to the node before second
-	NodeType<elemType> *n1 = NULL;
-	NodeType<elemType> *n2 = NULL;
+	NodeType<Type> *head = this->first;	// ptr to the head of the linked list
+	NodeType<Type> *current = head;	// ptr to traverse the list
+	NodeType<Type> *n1prev = NULL;	// ptr to the node before first
+	NodeType<Type> *n2prev = NULL;	// ptr to the node before second
+	NodeType<Type> *n1 = NULL;
+	NodeType<Type> *n2 = NULL;
 	unsigned int currentPosition = 0;	// need to keep track of index for index-based node swap
 	
 	if (!head)
@@ -337,11 +339,11 @@ void UnorderedLinkedList<elemType>::exchangeByIndex(const int first, const int s
 /// hardcoded examples for exchange(2,4)
 
 // Method 1:
-//template <class elemType>
-//void UnorderedLinkedList<elemType>::exchangeTwoFour()
+//template <class Type>
+//void UnorderedLinkedList<Type>::exchangeTwoFour()
 //{
-//	NodeType<elemType> *head = this->first;
-//	NodeType<elemType> *temp = head->link;
+//	NodeType<Type> *head = this->first;
+//	NodeType<Type> *temp = head->link;
 //	head->link = temp->link->link;
 //	temp->link->link = NULL;
 //	head->link->link = temp->link;
@@ -351,11 +353,11 @@ void UnorderedLinkedList<elemType>::exchangeByIndex(const int first, const int s
 
 
 // Method 2:
-template <class elemType>
-void UnorderedLinkedList<elemType>::exchangeTwoFour()
+template <class Type>
+void UnorderedLinkedList<Type>::exchangeTwoFour()
 {
-	NodeType<elemType> *head = this->first;
-	NodeType<elemType> *temp = head->link;
+	NodeType<Type> *head = this->first;
+	NodeType<Type> *temp = head->link;
 	head->link = temp->link->link;
 	head->link->link = temp->link;
 	temp->link->link = temp;

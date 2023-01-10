@@ -4,32 +4,32 @@
 #include "NodeType.h"
 #include "LinkedList.h"
 
-template <class elemType>
-class OrderedLinkedList : public LinkedListType<elemType>
+template <class Type>
+class OrderedLinkedList : public LinkedListType<Type>
 {
 public:
-	bool search(const elemType& searchItem) const;	// returns true if item is in the list
-	void insert(const elemType& newItem);			// insert node in place
-	void insertFirst(const elemType& newItem);		// insert node at beginning
-	void insertLast(const elemType& newItem);		// insert node at the end
-	void deleteNode(const elemType& deleteItem);	// delete a node from the list
+	bool search(const Type& searchItem) const;	// returns true if item is in the list
+	void insert(const Type& newItem);			// insert node in place
+	void insertFirst(const Type& newItem);		// insert node at beginning
+	void insertLast(const Type& newItem);		// insert node at the end
+	void deleteNode(const Type& deleteItem);	// delete a node from the list
 	
 	
-	void mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2);
+	void mergeLists(OrderedLinkedList<Type> &list1, OrderedLinkedList<Type> &list2);
 //	This function creates a new list by merging the elements
 //	of list1 and list2.
 //	Postcondition: first points to the merged list; list1 and list2 are empty
 	
-//	OrderedLinkedList<elemType> *mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2);
+//	OrderedLinkedList<Type> *mergeLists(OrderedLinkedList<Type> &list1, OrderedLinkedList<Type> &list2);
 	// same as void mergeLists, but this method returns the head of the new list
 };
 
 
-template <class elemType>
-bool OrderedLinkedList<elemType>::search(const elemType& searchItem) const
+template <class Type>
+bool OrderedLinkedList<Type>::search(const Type& searchItem) const
 {
 	
-	NodeType<elemType> *current = new NodeType<elemType>;	// node to traverse the list
+	NodeType<Type> *current = new NodeType<Type>;	// node to traverse the list
 	current = this->first;									// start search from first node
 	bool found = false;
 	
@@ -54,16 +54,16 @@ bool OrderedLinkedList<elemType>::search(const elemType& searchItem) const
 }
 
 
-template <class elemType>
-void OrderedLinkedList<elemType>::insert(const elemType& newItem)
+template <class Type>
+void OrderedLinkedList<Type>::insert(const Type& newItem)
 {
-	NodeType<elemType> *current = NULL;			// pointer to traverse the list
-	NodeType<elemType> *trailCurrent = NULL;	// pointer just before current
-	NodeType<elemType> *newNode = NULL;			// pointer to create a new node
+	NodeType<Type> *current = NULL;			// pointer to traverse the list
+	NodeType<Type> *trailCurrent = NULL;	// pointer just before current
+	NodeType<Type> *newNode = NULL;			// pointer to create a new node
 	
 	bool found;
 	
-	newNode = new NodeType<elemType>;	// create the node
+	newNode = new NodeType<Type>;	// create the node
 	newNode->info = newItem;			// store newItem in the node
 	newNode->link = NULL;				// redundant, but included for readability
 	
@@ -119,25 +119,25 @@ void OrderedLinkedList<elemType>::insert(const elemType& newItem)
 }
 
 
-template <class elemType>
-void OrderedLinkedList<elemType>::insertFirst(const elemType& newItem)
+template <class Type>
+void OrderedLinkedList<Type>::insertFirst(const Type& newItem)
 {
 	insert(newItem);
 }
 
 
-template <class elemType>
-void OrderedLinkedList<elemType>::insertLast(const elemType& newItem)
+template <class Type>
+void OrderedLinkedList<Type>::insertLast(const Type& newItem)
 {
 	insert(newItem);
 }
 
 
-template <class elemType>
-void OrderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
+template <class Type>
+void OrderedLinkedList<Type>::deleteNode(const Type& deleteItem)
 {
-	NodeType<elemType> *current = NULL;
-	NodeType<elemType> *trailCurrent = NULL;
+	NodeType<Type> *current = NULL;
+	NodeType<Type> *trailCurrent = NULL;
 	bool found;
 	
 	if (this->first == NULL)	// Case 1: The list is initially empty
@@ -206,12 +206,12 @@ void OrderedLinkedList<elemType>::deleteNode(const elemType& deleteItem)
 }
 
 
-template <class elemType>
-void OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2)
+template <class Type>
+void OrderedLinkedList<Type>::mergeLists(OrderedLinkedList<Type> &list1, OrderedLinkedList<Type> &list2)
 {
-	NodeType<elemType> *current = NULL;
-	NodeType<elemType> *nodeL1 = list1.first;
-	NodeType<elemType> *nodeL2 = list2.first;
+	NodeType<Type> *current = NULL;
+	NodeType<Type> *nodeL1 = list1.first;
+	NodeType<Type> *nodeL2 = list2.first;
 	this->count = list1.count + list2.count;
 
 	if (list1.first == NULL) // list 1 is empty
@@ -280,13 +280,13 @@ void OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1,
 }
 
 
-//template <class elemType>
-//OrderedLinkedList<elemType> *OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1, OrderedLinkedList<elemType> &list2)
+//template <class Type>
+//OrderedLinkedList<Type> *OrderedLinkedList<Type>::mergeLists(OrderedLinkedList<Type> &list1, OrderedLinkedList<Type> &list2)
 //{
-//	NodeType<elemType> *newHead = NULL;
-//	NodeType<elemType> *current = NULL;
-//	NodeType<elemType> *nodeL1 = list1.first;
-//	NodeType<elemType> *nodeL2 = list2.first;
+//	NodeType<Type> *newHead = NULL;
+//	NodeType<Type> *current = NULL;
+//	NodeType<Type> *nodeL1 = list1.first;
+//	NodeType<Type> *nodeL2 = list2.first;
 //
 //	if (list1.isEmpty())
 //	{
@@ -352,5 +352,34 @@ void OrderedLinkedList<elemType>::mergeLists(OrderedLinkedList<elemType> &list1,
 //	return newHead;
 //	// FIXME: build error when tyring to return newHead
 //}
+
+
+// Function deletes every element of L2 found in L1
+template <class Type>
+void deleteOc(OrderedLinkedList<Type>& L1, const OrderedLinkedList<Type>& L2)
+{
+	NodeType<Type>* ptrL1 = L1.getFirst();
+	NodeType<Type>* ptrL2 = L2.getFirst();
+		
+	while (ptrL1 && ptrL2)
+	{
+		if (ptrL1->info < ptrL2->info)
+		{
+			ptrL1 = ptrL1->link;
+		}
+		
+		else if (ptrL2->info < ptrL1->info)
+		{
+			ptrL2 = ptrL2->link;
+		}
+		
+		else	// ptr1->info == ptr2->info
+		{
+			NodeType<Type>* tempPtr = ptrL1->link;
+			L1.deleteNode(ptrL1->info);	// textbook method is defined to take value pointed to
+			ptrL1 = tempPtr;
+		}
+	}
+}
 
 #endif /* OrderedLinkedList_h */

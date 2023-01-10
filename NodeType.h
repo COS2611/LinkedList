@@ -1,13 +1,13 @@
 #ifndef NodeType_h
 #define NodeType_h
 
-template <class elemType>
+template <class Type>
 struct NodeType
 {
-	elemType info;
-	NodeType<elemType> *link;
-	NodeType<elemType>() : info(NULL), link(NULL) {}
-	NodeType<elemType>(elemType theVal) : info(theVal), link(NULL) {}
+	Type info;
+	NodeType<Type> *link;
+	NodeType<Type>() : info(NULL), link(NULL) {}
+	NodeType<Type>(Type theVal) : info(theVal), link(NULL) {}
 };
 
 #endif /* NodeType_h */

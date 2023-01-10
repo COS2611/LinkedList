@@ -5,13 +5,19 @@
 #include "LinkedListIterator.h"
 
 
-template <class elemType>
+template <class Type>
 class LinkedListType
 {
+public:
+	/// The following methods are not included in the text book:
+	friend void deleteOc(LinkedListType<Type> &L1, const LinkedListType<Type> &L2);
+	NodeType<Type>* getFirst() const;
+	NodeType<Type>* getLast() const;
+	
 protected:
-	int count;					// number of elements in the list
-	NodeType<elemType> *first;	// pointer to head node
-	NodeType<elemType> *last;	// pointer to tail node
+	int count;				// number of elements in the list
+	NodeType<Type> *first;	// pointer to head node
+	NodeType<Type> *last;	// pointer to tail node
 	
 	
 public:
@@ -22,45 +28,51 @@ public:
 	void print() const;								// print the list
 	bool isEmpty() const;							// returns true if list is empty
 	int length() const;								// returns the number of nodes in the list
-	elemType front() const;							// returns the first node's info
-	elemType back() const;							// returns the last node's info
-	elemType max() const;	 						// returns the largest element in the list
-	elemType min() const;							// returns the smallest element in the list
-	LinkedListIterator<elemType> begin();			// returns an iterator to the first node
-	LinkedListIterator<elemType> end();				// returns an iterator to the last node
+	Type front() const;							// returns the first node's info
+	Type back() const;							// returns the last node's info
+	Type max() const;	 						// returns the largest element in the list
+	Type min() const;							// returns the smallest element in the list
+	LinkedListIterator<Type> begin();			// returns an iterator to the first node
+	LinkedListIterator<Type> end();				// returns an iterator to the last node
 	
 	
 	// TODO: create a method to avoid insertion of duplicate elements
-	// TODO: overload < and > operators for generic elemType
+	// TODO: overload < and > operators for generic Type
 	
 	// overloaded assignment operator
-	const LinkedListType<elemType>& operator= (const LinkedListType<elemType>& otherList);
-	void copyList(const LinkedListType<elemType>& otherList);	// make an identical copy of the linked list
-	LinkedListType (const LinkedListType<elemType>& otherList);	// copy constructor
+	const LinkedListType<Type>& operator= (const LinkedListType<Type>& otherList);
+	void copyList(const LinkedListType<Type>& otherList);	// make an identical copy of the linked list
+	LinkedListType (const LinkedListType<Type>& otherList);	// copy constructor
 	
 	// TODO: implement evenOddPartition
-	NodeType<elemType> *evenOddIndexPartition(NodeType<elemType> *head);
+	NodeType<Type> *evenOddIndexPartition(NodeType<Type> *head);
 	// Arranges the list such that all the even index nodes appear before the odd index nodes
 	
 
 	
 	/// virtual functions (defined in derived classes)
-	virtual bool search(const elemType& searchItem) const = 0;	// returns true if item is in the list
-	virtual void insertFirst(const elemType& newItem) = 0;		// insert node at beginning
-	virtual void insertLast(const elemType& newItem) = 0;		// insert node at the end
-	virtual void deleteNode(const elemType& deleteItem) = 0;	// delete a node from the list
+	virtual bool search(const Type& searchItem) const = 0;	// returns true if item is in the list
+	virtual void insertFirst(const Type& newItem) = 0;		// insert node at beginning
+	virtual void insertLast(const Type& newItem) = 0;		// insert node at the end
+	virtual void deleteNode(const Type& deleteItem) = 0;	// delete a node from the list
 };
 
+template <class Type>
+NodeType<Type>* LinkedListType<Type>::getFirst() const { return first; }
 
-template <class elemType>
-LinkedListType<elemType>::LinkedListType()
+template <class Type>
+NodeType<Type>* LinkedListType<Type>::getLast() const { return last; }
+
+
+template <class Type>
+LinkedListType<Type>::LinkedListType()
 	: first (NULL), last (NULL), count (0) {}
 
 
-template <class elemType>
-void LinkedListType<elemType>::destroyList()
+template <class Type>
+void LinkedListType<Type>::destroyList()
 {
-	NodeType<elemType> *temp;	// pointer to traverse list
+	NodeType<Type> *temp;	// pointer to traverse list
 	
 	while (first != NULL)
 	{
@@ -73,24 +85,24 @@ void LinkedListType<elemType>::destroyList()
 }
 
 
-template <class elemType>
-void LinkedListType<elemType>::initializeList()
+template <class Type>
+void LinkedListType<Type>::initializeList()
 {
 	destroyList();
 }
 
 
-template <class elemType>
-LinkedListType<elemType>::~LinkedListType()
+template <class Type>
+LinkedListType<Type>::~LinkedListType()
 {
 	destroyList();
 }
 
 
-template <class elemType>
-void LinkedListType<elemType>::print() const
+template <class Type>
+void LinkedListType<Type>::print() const
 {
-	NodeType<elemType> *current {first};
+	NodeType<Type> *current = first;
 	while (current != NULL)
 	{
 		std::cout << current->info << " ";
@@ -99,41 +111,41 @@ void LinkedListType<elemType>::print() const
 }
 
 
-template <class elemType>
-bool LinkedListType<elemType>::isEmpty() const
+template <class Type>
+bool LinkedListType<Type>::isEmpty() const
 {
 	return first == NULL;
 }
 
 
-template <class elemType>
-int LinkedListType<elemType>::length() const
+template <class Type>
+int LinkedListType<Type>::length() const
 {
 	return count;
 }
 
 
-template <class elemType>
-elemType LinkedListType<elemType>::front() const
+template <class Type>
+Type LinkedListType<Type>::front() const
 {
 	assert(first != NULL);
 	return first->info;
 }
 
 
-template <class elemType>
-elemType LinkedListType<elemType>::back() const
+template <class Type>
+Type LinkedListType<Type>::back() const
 {
 	assert(last != NULL);
 	return last->info;
 }
 
 
-template <class elemType>
-elemType LinkedListType<elemType>::max() const
+template <class Type>
+Type LinkedListType<Type>::max() const
 {
-	NodeType<elemType> *current = this->first;
-	elemType largestElement = current->info;
+	NodeType<Type> *current = this->first;
+	Type largestElement = current->info;
 	
 	if (!this->first)
 	{
@@ -155,11 +167,11 @@ elemType LinkedListType<elemType>::max() const
 }
 
 
-template <class elemType>
-elemType LinkedListType<elemType>::min() const
+template <class Type>
+Type LinkedListType<Type>::min() const
 {
-	NodeType<elemType> *current = this->first;
-	elemType smallestElement = current->info;
+	NodeType<Type> *current = this->first;
+	Type smallestElement = current->info;
 	
 	if (!this->first)
 	{
@@ -181,35 +193,35 @@ elemType LinkedListType<elemType>::min() const
 }
 
 
-template <class elemType>
-LinkedListIterator<elemType> LinkedListType<elemType>::begin()
+template <class Type>
+LinkedListIterator<Type> LinkedListType<Type>::begin()
 {
-	LinkedListIterator<elemType> temp {first};
+	LinkedListIterator<Type> temp {first};
 	return temp;
 }
 
 
-template <class elemType>
-LinkedListIterator<elemType> LinkedListType<elemType>::end()
+template <class Type>
+LinkedListIterator<Type> LinkedListType<Type>::end()
 {
-	LinkedListIterator<elemType> temp {NULL};
+	LinkedListIterator<Type> temp {NULL};
 	return temp;
 }
 
 
-template <class elemType>
-LinkedListType<elemType>::LinkedListType(const LinkedListType<elemType>& otherList)
+template <class Type>
+LinkedListType<Type>::LinkedListType(const LinkedListType<Type>& otherList)
 {
 	first = NULL;
 	copyList(otherList);
 }
 
 
-template <class elemType>
-void LinkedListType<elemType>::copyList(const LinkedListType<elemType>& otherList)
+template <class Type>
+void LinkedListType<Type>::copyList(const LinkedListType<Type>& otherList)
 {
-	NodeType<elemType> *newNode = NULL;	// pointer to create a node
-	NodeType<elemType> *current = NULL;	// pointer to traverse the list
+	NodeType<Type> *newNode = NULL;	// pointer to create a node
+	NodeType<Type> *current = NULL;	// pointer to traverse the list
 	
 	// make sure the destination list is empty
 	if (first != NULL)
@@ -230,7 +242,7 @@ void LinkedListType<elemType>::copyList(const LinkedListType<elemType>& otherLis
 		count = otherList.count;
 		
 		// copy the first node
-		first = new NodeType<elemType>;
+		first = new NodeType<Type>;
 		first->info = current->info;
 		first->link = NULL;
 		last = first;
@@ -239,7 +251,7 @@ void LinkedListType<elemType>::copyList(const LinkedListType<elemType>& otherLis
 		// copy the remaining list
 		while (current != NULL)
 		{
-			newNode	= new NodeType<elemType>;
+			newNode	= new NodeType<Type>;
 			newNode->info = current->info;
 			newNode->link = NULL;
 			last->link = newNode;
@@ -250,8 +262,8 @@ void LinkedListType<elemType>::copyList(const LinkedListType<elemType>& otherLis
 }
 
 
-template <class elemType>
-const LinkedListType<elemType>& LinkedListType<elemType>::operator= (const LinkedListType<elemType>& otherList)
+template <class Type>
+const LinkedListType<Type>& LinkedListType<Type>::operator= (const LinkedListType<Type>& otherList)
 {
 	if (this != &otherList)	// avoid self-copy
 	{
@@ -261,13 +273,13 @@ const LinkedListType<elemType>& LinkedListType<elemType>::operator= (const Linke
 }
 
 
-//template <class elemType>
-//NodeType<elemType> LinkedListType<elemType>::*evenOddIndexPartition(NodeType<elemType> *head)
+//template <class Type>
+//NodeType<Type> LinkedListType<Type>::*evenOddIndexPartition(NodeType<Type> *head)
 //// Method 2: fewer pointers
 //{
-//	NodeType<elemType> *evenPtr = head;			// pointer to the next even node
-//	NodeType<elemType> *oddPtr = head->link;	// pointer to the next odd node
-//	NodeType<elemType> *oddHead = oddPtr;		// start of the odd sublist
+//	NodeType<Type> *evenPtr = head;			// pointer to the next even node
+//	NodeType<Type> *oddPtr = head->link;	// pointer to the next odd node
+//	NodeType<Type> *oddHead = oddPtr;		// start of the odd sublist
 //	
 //	// Case 1: The list is empty, or contains only one node
 //	if (!head && !head->link)
@@ -292,11 +304,11 @@ const LinkedListType<elemType>& LinkedListType<elemType>::operator= (const Linke
 
 
 
-//template <class elemType>
-//NodeType<elemType> *evenOddIndexPartition(NodeType<elemType> *head)
+//template <class Type>
+//NodeType<Type> *evenOddIndexPartition(NodeType<Type> *head)
 //// Method 1: use extra pointers
 //{
-//	NodeType<elemType> *current = head;	// pointer to traverse the list
+//	NodeType<Type> *current = head;	// pointer to traverse the list
 //	unsigned int index = 0;				// keep track of the index position
 //
 //	// Case 1: The list is empty, or contains only one node
@@ -306,10 +318,10 @@ const LinkedListType<elemType>& LinkedListType<elemType>::operator= (const Linke
 //	}
 //
 //	// Case 2: The list contains more than one node
-//	NodeType<elemType> *oddDummy = new NodeType<elemType>(-1);
-//	NodeType<elemType> *evenDummy = new NodeType<elemType>(-1);
-//	NodeType<elemType> *oddTail = oddDummy;
-//	NodeType<elemType> *evenTail = evenDummy;
+//	NodeType<Type> *oddDummy = new NodeType<Type>(-1);
+//	NodeType<Type> *evenDummy = new NodeType<Type>(-1);
+//	NodeType<Type> *oddTail = oddDummy;
+//	NodeType<Type> *evenTail = evenDummy;
 //
 //
 //	while (current)
