@@ -2,8 +2,7 @@
 #include "UnorderedLinkedList.h"
 #include "OrderedLinkedList.h"
 
-
-int main()
+static void test_deleteOc()
 {
 	OrderedLinkedList<int> list1;
 	OrderedLinkedList<int> list2;
@@ -45,6 +44,11 @@ int main()
 		list1.print();
 		std::cout << std::endl;
 	}
+}
+
+int main()
+{
+	test_deleteOc();
 
 	return 0;
 }

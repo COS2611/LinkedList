@@ -10,7 +10,7 @@ class LinkedListType
 {
 public:
 	/// The following methods are not included in the text book:
-	friend void deleteOc(LinkedListType<Type> &L1, const LinkedListType<Type> &L2);
+//	friend void deleteOc(LinkedListType<Type> &L1, const LinkedListType<Type> &L2);
 	NodeType<Type>* getFirst() const;
 	NodeType<Type>* getLast() const;
 	

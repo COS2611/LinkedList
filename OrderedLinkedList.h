@@ -7,6 +7,9 @@
 template <class Type>
 class OrderedLinkedList : public LinkedListType<Type>
 {
+//	friend void deleteOc(OrderedLinkedList<Type>& L1, const OrderedLinkedList<Type>& L2);
+	// FIXME: declaring deleteOc as a friend results in compilation error
+	
 public:
 	bool search(const Type& searchItem) const;	// returns true if item is in the list
 	void insert(const Type& newItem);			// insert node in place
@@ -358,8 +361,8 @@ void OrderedLinkedList<Type>::mergeLists(OrderedLinkedList<Type> &list1, Ordered
 template <class Type>
 void deleteOc(OrderedLinkedList<Type>& L1, const OrderedLinkedList<Type>& L2)
 {
-	NodeType<Type>* ptrL1 = L1.getFirst();
-	NodeType<Type>* ptrL2 = L2.getFirst();
+	NodeType<Type>* ptrL1 = L1.getFirst();	// prefer L1.first;
+	NodeType<Type>* ptrL2 = L2.getFirst();	// prefer L2.first;
 		
 	while (ptrL1 && ptrL2)
 	{
