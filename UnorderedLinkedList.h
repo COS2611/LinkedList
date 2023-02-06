@@ -21,6 +21,7 @@ public:
 	// TODO: implement method to exchange two nodes
 	void exchangeByIndex(const int first, const int second);
 	void exchangeTwoFour();
+	void deleteAll(const Type& deleteItem);
 	
 	void shareList(const UnorderedLinkedList<Type>& Orig, UnorderedLinkedList<Type>& listA, UnorderedLinkedList<Type>& listB);
 	// Copies all elements in an even index position to listA
@@ -157,6 +158,26 @@ void UnorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
 	}
 }
 
+template <class Type>
+void UnorderedLinkedList<Type>::deleteAll(const Type& deleteItem)
+{
+	NodeType<Type> *current = this->first;
+	NodeType<Type> *tempPtr = NULL;
+	
+	while (current)
+	{
+		if (current->info == deleteItem)
+		{
+			tempPtr = current->link;
+			this->deleteNode(current->info);
+			current = tempPtr;
+		}
+		else
+		{
+			current = current->link;
+		}
+	}
+}
 
 template <class Type>
 void UnorderedLinkedList<Type>::buildListForward()

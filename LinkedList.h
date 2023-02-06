@@ -14,7 +14,8 @@ public:
 	NodeType<Type>* getFirst() const;
 	NodeType<Type>* getLast() const;
 	
-protected:
+//protected:
+public:
 	int count;				// number of elements in the list
 	NodeType<Type> *first;	// pointer to head node
 	NodeType<Type> *last;	// pointer to tail node
@@ -346,6 +347,8 @@ const LinkedListType<Type>& LinkedListType<Type>::operator= (const LinkedListTyp
 //	evenTail->link = oddDummy->link;
 //	oddTail->link = NULL;
 //}
+
+
 
 #endif /* LinkedList_h */
 
