@@ -162,26 +162,48 @@ template <class Type>
 void UnorderedLinkedList<Type>::deleteAll(const Type& deleteItem)
 {
 	NodeType<Type> *current = NULL;
-	NodeType<Type> *tempPtr = NULL;
+	NodeType<Type> *trailCurrent = NULL;
 	
+	// Empty list
 	if (this->first == NULL)
 	{
-		std::cout << "Cannot delete from empty list.\n";
-		return;
+		std::cout << "Cannot delete from an empty list." << std::endl;
 	}
-	current = this->first;
 	
-	while (current)
+	// Non-empty list
+	else
 	{
-		if (current->info == deleteItem)
+		current = this->first;
+		while (current != NULL)
 		{
-			tempPtr = current->link;
-			this->deleteNode(current->info);
-			current = tempPtr;
-		}
-		else
-		{
-			current = current->link;
+			if (current->info == deleteItem)
+			{
+				// The item to be deleted is the first node
+				if (current == this->first)
+				{
+					this->first = this->first->link;
+					delete current;
+					current = this->first;
+					if (this->first == NULL)
+						this->last = NULL;
+				}
+				else
+				{
+					trailCurrent->link = current->link;
+					
+					// The item to be deleted is the last node
+					if (current == this->last)
+						this->last = trailCurrent;
+					
+					delete current;
+					current = trailCurrent->link;
+				}
+			}
+			else	
+			{
+				trailCurrent = current;
+				current = current->link;
+			}
 		}
 	}
 }
