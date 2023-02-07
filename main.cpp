@@ -68,6 +68,8 @@ static void test_deleteAll()
 {
 	// Test 0: print output
 	UnorderedLinkedList<int> myList;
+	int deleteItem = 3;
+	
 	myList.insertLast(1);
 	myList.insertLast(2);
 	myList.insertLast(3);
@@ -77,12 +79,16 @@ static void test_deleteAll()
 	myList.insertLast(5);
 	myList.insertLast(3);
 	
-	std::cout << "\nMy list before deleteAll: ";
+	std::cout << "My list before deleteAll: ";
 	myList.print();
+	std::cout << std::endl;
 	
-	myList.deleteAll(3);
-	std::cout << "\nMy list after deleteAll: ";
+	std::cout << "Item to be deleted: " << deleteItem << "\n";
+	myList.deleteAll(deleteItem);
+	
+	std::cout << "My list after deleteAll: ";
 	myList.print();
+	std::cout << std::endl;
 	
 	assert(myList.length() == 4);
 	assert(myList.search(1) == true);

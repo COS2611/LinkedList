@@ -161,8 +161,15 @@ void UnorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
 template <class Type>
 void UnorderedLinkedList<Type>::deleteAll(const Type& deleteItem)
 {
-	NodeType<Type> *current = this->first;
+	NodeType<Type> *current = NULL;
 	NodeType<Type> *tempPtr = NULL;
+	
+	if (this->first == NULL)
+	{
+		std::cout << "Cannot delete from empty list.\n";
+		return;
+	}
+	current = this->first;
 	
 	while (current)
 	{
