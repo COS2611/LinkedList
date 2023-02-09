@@ -183,6 +183,7 @@ void UnorderedLinkedList<Type>::deleteAll(const Type& deleteItem)
 				{
 					this->first = this->first->link;
 					delete current;
+					this->count--;
 					current = this->first;
 					if (this->first == NULL)
 						this->last = NULL;
@@ -196,6 +197,7 @@ void UnorderedLinkedList<Type>::deleteAll(const Type& deleteItem)
 						this->last = trailCurrent;
 					
 					delete current;
+					this->count--;
 					current = trailCurrent->link;
 				}
 			}
@@ -242,7 +244,6 @@ template <class Type>
 void UnorderedLinkedList<Type>::shareList(const UnorderedLinkedList<Type>& Orig, UnorderedLinkedList<Type>& listA, UnorderedLinkedList<Type>& listB)
 {
 	NodeType<Type> *current = Orig.first;
-	unsigned int currentPosition = 0;
 	
 	// Case 1: The original list is empty
 	if (!Orig.first)
