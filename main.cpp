@@ -9,5 +9,7 @@
 int main()
 {
 	test_deleteSmallest();
+	test_deleteAll();
+	test_deleteOc();
 	return 0;
 }

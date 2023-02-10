@@ -67,7 +67,7 @@ void OrderedLinkedList<Type>::insert(const Type& newItem)
 	
 	bool found;
 	
-	newNode = new NodeType<Type>;	// create the node
+	newNode = new NodeType<Type>;		// create the node
 	newNode->info = newItem;			// store newItem in the node
 	newNode->link = NULL;				// redundant, but included for readability
 	
@@ -77,7 +77,6 @@ void OrderedLinkedList<Type>::insert(const Type& newItem)
 	{
 		this->first = newNode;
 		this->last = newNode;
-		this->count++;
 	}
 	
 	else	// the list is not empty
@@ -104,7 +103,6 @@ void OrderedLinkedList<Type>::insert(const Type& newItem)
 		{
 			newNode->link = this->first;
 			this->first = newNode;
-			this->count++;
 		}
 		
 		
@@ -120,6 +118,7 @@ void OrderedLinkedList<Type>::insert(const Type& newItem)
 			}
 		}
 	}
+	this->count++;
 }
 
 
@@ -384,6 +383,13 @@ void deleteOc(OrderedLinkedList<Type>& L1, const OrderedLinkedList<Type>& L2)
 			ptrL1 = tempPtr;
 		}
 	}
+}
+
+
+template <class Type>
+void OrderedLinkedList<Type>::deleteSmallest()
+{
+	
 }
 
 #endif /* OrderedLinkedList_h */

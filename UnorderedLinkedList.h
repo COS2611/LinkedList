@@ -221,7 +221,7 @@ void UnorderedLinkedList<Type>::deleteSmallest()
 	// Case 1: The list is empty
 	if (this->first == NULL)
 	{
-		std::cout << "Cannot delete from empty list." << std::endl;
+		std::cout << "Cannot delete from an empty list." << std::endl;
 	}
 	else
 	{

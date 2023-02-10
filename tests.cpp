@@ -14,45 +14,256 @@
 
 static void test_deleteOc()
 {
-	OrderedLinkedList<int> list1;
-	OrderedLinkedList<int> list2;
-	
-	// TODO: Write all test cases
 	// Test case 1: both lists are empty
-	// Test case 2: list1 is empty
-	// Test case 3: list2 is empty
-	// Test case 4: list1 contains one item
-	// Test case 5: list2 contains one item
-	// Test case 6: both lists contain one item
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		deleteOc(list1, list2);
+		assert(list1.first == NULL);
+		assert(list1.last == NULL);
+		assert(list1.count == 0);
+		assert(list2.first == NULL);
+		assert(list2.last == NULL);
+		assert(list2.count == 0);
+//		std::cout << "Test case 1 passed!\n";
+	}
 	
+	// Test case 2: list1 is empty
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list2.insert(2);
+		deleteOc(list1, list2);
+		assert(list1.first == NULL);
+		assert(list1.last == NULL);
+		assert(list1.count == 0);
+		assert(list2.first != NULL);
+		assert(list2.last != NULL);
+		assert(list2.count > 0);
+//		std::cout << "Test case 2 passed!\n";
+	}
+	
+	// Test case 3: list2 is empty
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(133);
+		deleteOc(list1, list2);
+		assert(list1.first != NULL);
+		assert(list1.last != NULL);
+		assert(list2.first == NULL);
+		assert(list2.last == NULL);
+		assert(list1.count > 0);
+		assert(list2.count == 0);
+//		std::cout << "Test case 3 passed!\n";
+	}
+	
+	// Test case 4: list1 contains one item
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(5);
+		deleteOc(list1, list2);
+		assert(list1.first != NULL);
+		assert(list1.last != NULL);
+		assert(list1.count == 1);
+		assert(list2.first == NULL);
+		assert(list2.last == NULL);
+		assert(list2.count == 0);
+//		std::cout << "Test case 4 passed!\n";
+	}
+
+	// Test case 5: list2 contains one item
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list2.insert(7);
+		deleteOc(list1, list2);
+		assert(list1.first == NULL);
+		assert(list1.last == NULL);
+		assert(list1.count == 0);
+		assert(list2.first != NULL);
+		assert(list2.last != NULL);
+		assert(list2.count == 1);
+//		std::cout << "Test case 5 passed!\n";
+	}
+
+	// Test case 6: both lists contain one item
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(5);
+		list2.insert(5);
+		deleteOc(list1, list2);
+		assert(list1.first == NULL);
+		assert(list1.last == NULL);
+		assert(list1.count == 0);
+		assert(list2.first != NULL);
+		assert(list2.last != NULL);
+		assert(list2.count == 1);
+//		std::cout << "Test case 6 passed!\n";
+	}
+
 	// Test case 7: both lists contain multiple items
 	{
-		list1.insert(3);
-		list1.insert(5);
-		list1.insert(5);
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
 		list1.insert(5);
 		list1.insert(7);
-		list1.insert(9);
-		
+		list2.insert(2);
+		list2.insert(7);
+		deleteOc(list1, list2);
+		assert(list1.first != NULL);
+		assert(list1.last != NULL);
+		assert(list1.count == 1);
+		assert(list2.first != NULL);
+		assert(list2.last != NULL);
+		assert(list2.count == 2);
+//		std::cout << "Test case 7 passed!\n";
+	}
+
+	// Test case 8: list1 contains duplicates
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(1);
+		list1.insert(2);
+		list1.insert(3);
+		list1.insert(2);
+		list1.insert(4);
+		list2.insert(3);
+		list2.insert(4);
+		deleteOc(list1, list2);
+		assert(list1.count == 3);
+		assert(list1.first->info == 1);
+		assert(list1.last->info == 2);
+		assert(list2.count == 2);
+		assert(list2.first->info == 3);
+		assert(list2.last->info == 4);
+//		std::cout << "Test case 8 passed!\n";
+	}
+
+	// Test case 9: list2 contains duplicates
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(1);
+		list1.insert(2);
+		list1.insert(3);
+		list2.insert(3);
+		list2.insert(4);
+		list2.insert(4);
+		deleteOc(list1, list2);
+		assert(list1.count == 2);
+		assert(list1.first->info == 1);
+		assert(list1.last->info == 2);
+		assert(list2.count == 3);
+		assert(list2.first->info == 3);
+		assert(list2.last->info == 4);
+//		std::cout << "Test case 9 passed!\n";
+	}
+
+	// Test case 10: both lists contain duplicates
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(1);
+		list1.insert(2);
+		list1.insert(3);
+		list1.insert(2);
+		list2.insert(3);
+		list2.insert(4);
+		list2.insert(3);
+		deleteOc(list1, list2);
+		assert(list1.count == 3);
+		assert(list1.first->info == 1);
+		assert(list1.last->info == 2);
+		assert(list2.count == 3);
+		assert(list2.first->info == 3);
+		assert(list2.last->info == 4);
+//		std::cout << "Test case 10 passed!\n";
+	}
+	
+	// Test case 11: both lists contain items that are in the same order
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(1);
+		list1.insert(2);
+		list1.insert(3);
+		list2.insert(1);
+		list2.insert(2);
+		list2.insert(3);
+		deleteOc(list1, list2);
+		assert(list1.first == NULL);
+		assert(list1.last == NULL);
+		assert(list1.count == 0);
+		assert(list2.first != NULL);
+		assert(list2.last != NULL);
+		assert(list2.count == 3);
+//		std::cout << "Test case 11 passed!\n";
+	}
+
+	// Test case 12: both lists contain items that are in different order
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(1);
+		list1.insert(2);
+		list1.insert(3);
+		list2.insert(3);
+		list2.insert(2);
+		list2.insert(1);
+		deleteOc(list1, list2);
+		assert(list1.first == NULL);
+		assert(list1.last == NULL);
+		assert(list1.count == 0);
+		assert(list2.first != NULL);
+		assert(list2.last != NULL);
+		assert(list2.count == 3);
+//		std::cout << "Test case 12 passed!\n";
+	}
+
+	// Test case 13: items in list2 are all unique
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(1);
+		list1.insert(2);
+		list1.insert(3);
 		list2.insert(4);
 		list2.insert(5);
 		list2.insert(6);
-		list2.insert(7);
-		list2.insert(7);
-		
-		std::cout << "List 1 before deleteOc: ";
-		list1.print();
-		std::cout << std::endl;
-		
-		std::cout << "List 2: ";
-		list2.print();
-		std::cout << std::endl;
-		
 		deleteOc(list1, list2);
-		
-		std::cout << "List 1 after deleteOc: ";
-		list1.print();
-		std::cout << std::endl;
+		assert(list1.first != NULL);
+		assert(list1.last != NULL);
+		assert(list1.count == 3);
+		assert(list2.first != NULL);
+		assert(list2.last != NULL);
+		assert(list2.count == 3);
+//		std::cout << "Test case 13 passed!\n";
+	}
+	
+	// Test case 14: both lists contain items that are only in one list
+	{
+		OrderedLinkedList<int> list1;
+		OrderedLinkedList<int> list2;
+		list1.insert(2);
+		list1.insert(4);
+		list1.insert(6);
+		list1.insert(8);
+		list2.insert(1);
+		list2.insert(3);
+		list2.insert(5);
+		list2.insert(7);
+		deleteOc(list1, list2);
+		assert(list1.first != NULL);
+		assert(list1.last != NULL);
+		assert(list1.count == 4);
+		assert(list2.first != NULL);
+		assert(list2.last != NULL);
+		assert(list2.count == 4);
+//		std::cout << "Test case 14 passed!\n";
 	}
 }
 
@@ -74,38 +285,6 @@ static void test_deleteOc_STL()
 
 static void test_deleteAll()
 {
-	// Test 0: print output
-	UnorderedLinkedList<int> myList;
-	int deleteItem = 3;
-	
-	myList.insertLast(1);
-	myList.insertLast(2);
-	myList.insertLast(3);
-	myList.insertLast(3);
-	myList.insertLast(3);
-	myList.insertLast(4);
-	myList.insertLast(5);
-	myList.insertLast(3);
-	
-	std::cout << "My list before deleteAll: ";
-	myList.print();
-	std::cout << std::endl;
-	
-	std::cout << "Item to be deleted: " << deleteItem << "\n";
-	myList.deleteAll(deleteItem);
-	
-	std::cout << "My list after deleteAll: ";
-	myList.print();
-	std::cout << std::endl;
-	
-	assert(myList.length() == 4);
-	assert(myList.search(1) == true);
-	assert(myList.search(2) == true);
-	assert(myList.search(3) == false);
-	assert(myList.search(4) == true);
-	assert(myList.search(5) == true);
-	
-	
 	// Test 1: Empty list, delete value that doesn't exist
 	UnorderedLinkedList<int> list1;
 	list1.deleteAll(5);
@@ -186,7 +365,7 @@ static void test_deleteSmallest()
 	UnorderedLinkedList<int> list1;
 	list1.deleteSmallest();
 	assert(list1.count == 0);
-	std::cout << "Test case 1 passed!\n";
+//	std::cout << "Test case 1 passed!\n";
 	
 	// Test case 2: The list contains only one node
 	UnorderedLinkedList<int> list2;
@@ -194,7 +373,7 @@ static void test_deleteSmallest()
 	list2.deleteSmallest();
 	assert(list2.count == 0);
 	assert(list2.search(1) == false);
-	std::cout << "Test case 2 passed!\n";
+//	std::cout << "Test case 2 passed!\n";
 	
 	// Test case 3: List has more than one node and smallest element is in the first node
 	UnorderedLinkedList<int> list3;
@@ -204,7 +383,7 @@ static void test_deleteSmallest()
 	assert(list3.count == 1);
 	assert(list3.search(1) == false);
 	assert(list3.search(100) == true);
-	std::cout << "Test case 3 passed!\n";
+//	std::cout << "Test case 3 passed!\n";
 	
 	// Test case 4: List has more than one node and smallest element is somewhere in the middle
 	UnorderedLinkedList<int> list4;
@@ -224,7 +403,7 @@ static void test_deleteSmallest()
 	assert(list4.search(6) == false);
 	assert(list4.search(134) == true);
 	assert(list4.search(299) == true);
-	std::cout << "Test case 4 passed!\n";
+//	std::cout << "Test case 4 passed!\n";
 	
 	// Test case 5: List has more than one node and smallest element is in the last node
 	UnorderedLinkedList<int> list5;
@@ -240,5 +419,5 @@ static void test_deleteSmallest()
 	assert(list5.search(3) == true);
 	assert(list5.search(2) == true);
 	assert(list5.search(1) == false);
-	std::cout << "Test case 5 passed!\n";
+//	std::cout << "Test case 5 passed!\n";
 }
