@@ -56,6 +56,8 @@ public:
 	virtual void insertFirst(const Type& newItem) = 0;		// insert node at beginning
 	virtual void insertLast(const Type& newItem) = 0;		// insert node at the end
 	virtual void deleteNode(const Type& deleteItem) = 0;	// delete a node from the list
+	virtual void deleteSmallest() = 0;	// delete the first occurrence of the node with the smallest value
+	
 };
 
 template <class Type>

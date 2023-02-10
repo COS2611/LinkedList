@@ -16,6 +16,7 @@ public:
 	void insertFirst(const Type& newItem);		// insert node at beginning
 	void insertLast(const Type& newItem);		// insert node at the end
 	void deleteNode(const Type& deleteItem);	// delete a node from the list
+	void deleteSmallest();
 	
 	
 	void mergeLists(OrderedLinkedList<Type> &list1, OrderedLinkedList<Type> &list2);

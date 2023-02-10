@@ -16,13 +16,13 @@ public:
 	void buildListForward();
 	void buildListBackward();
 	
-	
 	// TODO: implement insertAfter
 	// TODO: implement method to exchange two nodes
 	void exchangeByIndex(const int first, const int second);
 	void exchangeTwoFour();
-	void deleteAll(const Type& deleteItem);
-	
+	void deleteAll(const Type& deleteItem); // Deletes all occurences of a given value in an unordered linked list.
+	void deleteSmallest();
+
 	void shareList(const UnorderedLinkedList<Type>& Orig, UnorderedLinkedList<Type>& listA, UnorderedLinkedList<Type>& listB);
 	// Copies all elements in an even index position to listA
 	// and all elements in an odd index position to listB
@@ -207,6 +207,70 @@ void UnorderedLinkedList<Type>::deleteAll(const Type& deleteItem)
 				current = current->link;
 			}
 		}
+	}
+}
+
+template <class Type>
+void UnorderedLinkedList<Type>::deleteSmallest()
+{
+	NodeType<Type> *current = NULL;			// pointer to traverse the list
+	NodeType<Type> *smallest = NULL;		// pointer to first occurrence of smallest value
+	NodeType<Type> *trailCurrent = NULL;	// pointer to node before current
+	NodeType<Type> *trailSmallest = NULL;	// pointer to node before smallest
+
+	// Case 1: The list is empty
+	if (this->first == NULL)
+	{
+		std::cout << "Cannot delete from empty list." << std::endl;
+	}
+	else
+	{
+		// Case 2: The list contains only one node
+		if (this->first->link == NULL)
+		{
+			this->first = NULL;
+			delete this->last;
+			this->last = NULL;
+		}
+
+		else	// The list contains more than one node
+		{
+			smallest = this->first;
+			trailCurrent = this->first;
+			current = this->first->link;
+
+			// find the smallest element
+			while (current != NULL)
+			{
+				if (current->info < smallest->info)
+				{
+					smallest = current;
+					trailSmallest = trailCurrent;
+				}
+				trailCurrent = current;
+				current = current->link;
+			}
+
+			// Case 3: List has more than one node and smallest element is in the first node
+			if (smallest == this->first)
+			{
+				this->first = this->first->link;
+			}
+
+			// Case 4: List has more than one node and smallest element is not in the first node
+			else
+			{
+				trailSmallest->link = smallest->link;
+
+				// Case 5: List has more than one node and smallest element is in the last node
+				if (smallest == this->last)
+				{
+					this->last = trailSmallest;
+				}
+				delete smallest;
+			}
+		}
+		this->count--;
 	}
 }
 
