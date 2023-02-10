@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E7A20DF28CCC48300C84BE2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E7A20DE28CCC48300C84BE2 /* main.cpp */; };
+		5EDF101D299613B80042FE91 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EDF101C299613B80042FE91 /* tests.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		5EA2592128D3515B004A191E /* LinkedListIterator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkedListIterator.h; sourceTree = "<group>"; };
 		5EA2592228D356D7004A191E /* NodeType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeType.h; sourceTree = "<group>"; };
 		5EA815CD29877830005C1C4F /* LinkedListSTL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkedListSTL.h; sourceTree = "<group>"; };
+		5EDF101C299613B80042FE91 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 		5E7A20D228CCC48300C84BE2 = {
 			isa = PBXGroup;
 			children = (
+				5EDF101C299613B80042FE91 /* tests.cpp */,
 				5EA815CD29877830005C1C4F /* LinkedListSTL.h */,
 				5E7A20DE28CCC48300C84BE2 /* main.cpp */,
 				5EA2592028D2F741004A191E /* LinkedList.h */,
@@ -124,6 +127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E7A20DF28CCC48300C84BE2 /* main.cpp in Sources */,
+				5EDF101D299613B80042FE91 /* tests.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
