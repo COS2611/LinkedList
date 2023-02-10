@@ -172,18 +172,71 @@ static void test_deleteAll()
 	if (list9.last != NULL) { assert(list9.back() == 1); }
 }
 
+static void test_deleteSmallest()
+{
+	// Test case 1: The list is empty
+	UnorderedLinkedList<int> list1;
+	list1.deleteSmallest();
+	assert(list1.count == 0);
+	std::cout << "Test case 1 passed!\n";
+	
+	// Test case 2: The list contains only one node
+	UnorderedLinkedList<int> list2;
+	list2.insertLast(1);
+	list2.deleteSmallest();
+	assert(list2.count == 0);
+	assert(list2.search(1) == false);
+	std::cout << "Test case 2 passed!\n";
+	
+	// Test case 3: List has more than one node and smallest element is in the first node
+	UnorderedLinkedList<int> list3;
+	list3.insertLast(1);
+	list3.insertLast(100);
+	list3.deleteSmallest();
+	assert(list3.count == 1);
+	assert(list3.search(1) == false);
+	assert(list3.search(100) == true);
+	std::cout << "Test case 3 passed!\n";
+	
+	// Test case 4: List has more than one node and smallest element is somewhere in the middle
+	UnorderedLinkedList<int> list4;
+	list4.insertLast(14);
+	list4.insertLast(100);
+	list4.insertLast(51);
+	list4.insertLast(10);
+	list4.insertLast(6);
+	list4.insertLast(134);
+	list4.insertLast(299);
+	list4.deleteSmallest();
+	assert(list4.count == 6);
+	assert(list4.search(14) == true);
+	assert(list4.search(100) == true);
+	assert(list4.search(51) == true);
+	assert(list4.search(10) == true);
+	assert(list4.search(6) == false);
+	assert(list4.search(134) == true);
+	assert(list4.search(299) == true);
+	std::cout << "Test case 4 passed!\n";
+	
+	// Test case 5: List has more than one node and smallest element is in the last node
+	UnorderedLinkedList<int> list5;
+	list5.insertLast(5);
+	list5.insertLast(4);
+	list5.insertLast(3);
+	list5.insertLast(2);
+	list5.insertLast(1);
+	list5.deleteSmallest();
+	assert(list5.count == 4);
+	assert(list5.search(5) == true);
+	assert(list5.search(4) == true);
+	assert(list5.search(3) == true);
+	assert(list5.search(2) == true);
+	assert(list5.search(1) == false);
+	std::cout << "Test case 5 passed!\n";
+}
 
 int main()
 {
-//	std::cout << "\ndeleteOc using Malik OrderedLinkedList:\n";
-//	std::cout << "---------------------------------------\n";
-//	test_deleteOc();
-//
-//	std::cout << "\ndeleteOc using STL Linked List:\n";
-//	std::cout << "-------------------------------\n";
-//	test_deleteOc_STL();
-	
-	test_deleteAll();
-	
+	test_deleteSmallest();
 	return 0;
 }
