@@ -361,26 +361,34 @@ void OrderedLinkedList<Type>::mergeLists(OrderedLinkedList<Type> &list1, Ordered
 template <class Type>
 void deleteOc(OrderedLinkedList<Type>& L1, const OrderedLinkedList<Type>& L2)
 {
-	NodeType<Type>* ptrL1 = L1.getFirst();	// prefer L1.first;
-	NodeType<Type>* ptrL2 = L2.getFirst();	// prefer L2.first;
-		
-	while (ptrL1 && ptrL2)
+	if (L1.first == NULL)
 	{
-		if (ptrL1->info < ptrL2->info)
+		std::cout << "Cannot delete from an empty list.\n";
+	}
+	
+	else
+	{
+		NodeType<Type>* ptrL1 = L1.first;
+		NodeType<Type>* ptrL2 = L2.first;
+			
+		while (ptrL1 && ptrL2)
 		{
-			ptrL1 = ptrL1->link;
-		}
-		
-		else if (ptrL2->info < ptrL1->info)
-		{
-			ptrL2 = ptrL2->link;
-		}
-		
-		else	// ptr1->info == ptr2->info
-		{
-			NodeType<Type>* tempPtr = ptrL1->link;
-			L1.deleteNode(ptrL1->info);	// textbook method is defined to take value pointed to
-			ptrL1 = tempPtr;
+			if (ptrL1->info < ptrL2->info)
+			{
+				ptrL1 = ptrL1->link;
+			}
+			
+			else if (ptrL2->info < ptrL1->info)
+			{
+				ptrL2 = ptrL2->link;
+			}
+			
+			else	// ptr1->info == ptr2->info
+			{
+				NodeType<Type>* tempPtr = ptrL1->link;
+				L1.deleteNode(ptrL1->info);	// textbook method is defined to take value pointed to
+				ptrL1 = tempPtr;
+			}
 		}
 	}
 }
@@ -389,7 +397,7 @@ void deleteOc(OrderedLinkedList<Type>& L1, const OrderedLinkedList<Type>& L2)
 template <class Type>
 void OrderedLinkedList<Type>::deleteSmallest()
 {
-	
+	// TODO: implement me
 }
 
 #endif /* OrderedLinkedList_h */
