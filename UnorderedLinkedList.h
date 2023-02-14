@@ -59,7 +59,6 @@ bool UnorderedLinkedList<Type>::search(const Type& searchItem) const
 	return found;
 }
 
-
 template <class Type>
 void UnorderedLinkedList<Type>::insertFirst(const Type& newItem)
 {
@@ -304,11 +303,10 @@ void UnorderedLinkedList<Type>::buildListBackward()
 }
 
 
+// NOTE: exam question requires that this is a class method
 template <class Type>
 void UnorderedLinkedList<Type>::shareList(const UnorderedLinkedList<Type>& Orig, UnorderedLinkedList<Type>& listA, UnorderedLinkedList<Type>& listB)
 {
-	NodeType<Type> *current = Orig.first;
-	
 	// Case 1: The original list is empty
 	if (!Orig.first)
 	{
@@ -477,6 +475,19 @@ void UnorderedLinkedList<Type>::exchangeTwoFour()
 	head->link->link = temp->link;
 	temp->link->link = temp;
 	temp->link = NULL;
+}
+
+
+template <class Type>
+static void printList(const UnorderedLinkedList<Type> &list)
+{
+	NodeType<Type> *current = list.first;
+	while (current)
+	{
+		std::cout << current->info << " ";
+		current = current->link;
+	}
+	std::cout << std::endl;
 }
 
 #endif /* UnorderedLinkedList_h */

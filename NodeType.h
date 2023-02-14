@@ -10,4 +10,5 @@ struct NodeType
 	NodeType<Type>(Type theVal) : info(theVal), link(NULL) {}
 };
 
+
 #endif /* NodeType_h */

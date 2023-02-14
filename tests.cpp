@@ -421,3 +421,75 @@ static void test_deleteSmallest()
 	assert(list5.search(1) == false);
 //	std::cout << "Test case 5 passed!\n";
 }
+
+static void test_shareList()
+{
+	// Test case 0: COS2611-06-2020-Q2
+	UnorderedLinkedList<int> originalList;
+	UnorderedLinkedList<int> listA;
+	UnorderedLinkedList<int> listB;
+	originalList.insertLast(0);
+	originalList.insertLast(1);
+	originalList.insertLast(2);
+	originalList.insertLast(3);
+	originalList.insertLast(4);
+	originalList.insertLast(5);
+	originalList.shareList(originalList, listA, listB);
+	std::cout << "Original list: ";
+	printList(originalList);
+	std::cout << "List A: ";
+	printList(listA);
+	std::cout << "List B: ";
+	printList(listB);
+	
+	// Test case 1: empty original list
+	UnorderedLinkedList<int> emptyList;
+	UnorderedLinkedList<int> evenList, oddList;
+	emptyList.shareList(emptyList, evenList, oddList);
+	assert(evenList.isEmpty());
+	assert(oddList.isEmpty());
+	
+	// Test case 2: original list with one element
+	UnorderedLinkedList<int> oneElementList;
+	oneElementList.insertLast(1);
+	UnorderedLinkedList<int> oneEvenList, oneOddList;
+	oneElementList.shareList(oneElementList, oneEvenList, oneOddList);
+	assert(oneEvenList.count == 1 && oneEvenList.search(1));
+	assert(oneOddList.isEmpty());
+	
+	// Test case 3: original list with two elements
+	UnorderedLinkedList<int> twoElementList;
+	twoElementList.insertLast(2);
+	twoElementList.insertLast(4);
+	UnorderedLinkedList<int> twoEvenList, twoOddList;
+	twoElementList.shareList(twoElementList, twoEvenList, twoOddList);
+	assert(twoEvenList.count == 1 && twoEvenList.search(2));
+	assert(twoOddList.count == 1 && twoOddList.search(4));
+	
+	// Test case 4: original list with multiple elements
+	UnorderedLinkedList<int> multipleElementList;
+	multipleElementList.insertLast(2);
+	multipleElementList.insertLast(4);
+	multipleElementList.insertLast(6);
+	multipleElementList.insertLast(8);
+	multipleElementList.insertLast(10);
+	UnorderedLinkedList<int> multipleEvenList, multipleOddList;
+	multipleElementList.shareList(multipleElementList, multipleEvenList, multipleOddList);
+	assert(multipleEvenList.count == 3 && multipleEvenList.search(2) && multipleEvenList.search(6) && multipleEvenList.search(10));
+	assert(multipleOddList.count == 2 && multipleOddList.search(4) && multipleOddList.search(8));
+	
+	// Test case 5: original list of custom type
+//	struct Person
+//	{
+//		std::string name;
+//		int age;
+//	};
+//	UnorderedLinkedList<Person> personList;
+//	personList.insertLast({"Alice", 20});
+//	personList.insertLast({"Bob", 25});
+//	UnorderedLinkedList<Person> personEvenList, personOddList;
+//	personList.shareList(personList, personEvenList, personOddList);
+//	assert(personEvenList.count == 1 && personEvenList.search({"Alice", 20}));
+//	assert(personOddList.count == 1 && personOddList.search({"Bob", 25}));
+	
+}

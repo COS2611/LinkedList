@@ -11,5 +11,6 @@ int main()
 	test_deleteSmallest();
 	test_deleteAll();
 	test_deleteOc();
+	test_shareList();
 	return 0;
 }
