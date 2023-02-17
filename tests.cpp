@@ -496,18 +496,61 @@ static void test_shareList()
 	assert(multipleEvenList.count == 3 && multipleEvenList.search(2) && multipleEvenList.search(6) && multipleEvenList.search(10));
 	assert(multipleOddList.count == 2 && multipleOddList.search(4) && multipleOddList.search(8));
 	
-	// Test case 5: original list of custom type
-//	struct Person
-//	{
-//		std::string name;
-//		int age;
-//	};
-//	UnorderedLinkedList<Person> personList;
-//	personList.insertLast({"Alice", 20});
-//	personList.insertLast({"Bob", 25});
-//	UnorderedLinkedList<Person> personEvenList, personOddList;
-//	personList.shareList(personList, personEvenList, personOddList);
-//	assert(personEvenList.count == 1 && personEvenList.search({"Alice", 20}));
-//	assert(personOddList.count == 1 && personOddList.search({"Bob", 25}));
+}
+
+
+static void test_occurrenceCounter()
+{
+	// Test case 1: The given value is not in the linked list
+	{
+		UnorderedLinkedList<int> list;
+		list.insertLast(1);
+		list.insertLast(2);
+		list.insertLast(3);
+		list.insertLast(4);
+		int occur = 5;
+		int count = list.occurrenceCounter(list, occur);
+		assert(count == 0);
+	}
 	
+	// Test case 2: The given value appears multiple times in the linked list
+	{
+		UnorderedLinkedList<int> list;
+		list.insertLast(1);
+		list.insertLast(2);
+		list.insertLast(2);
+		list.insertLast(3);
+		list.insertLast(2);
+		int occur = 2;
+		int count = list.occurrenceCounter(list, occur);
+		assert(count == 3);
+	}
+	
+	// Test case 3: The given value appears only once in the linked list
+	{
+		UnorderedLinkedList<int> list;
+		list.insertLast(1);
+		list.insertLast(2);
+		list.insertLast(3);
+		int occur = 2;
+		int count = list.occurrenceCounter(list, occur);
+		assert(count == 1);
+	}
+	
+	// Test case 4: The linked list is empty
+	{
+		UnorderedLinkedList<int> list;
+		int occur = 1;
+		int count = list.occurrenceCounter(list, occur);
+		assert(count == 0);
+	}
+	
+	// Test case 5: The given value is the only value in the linked list
+	{
+		UnorderedLinkedList<int> list;
+		list.insertLast(5);
+		int occur = 5;
+		int count = list.occurrenceCounter(list, occur);
+		assert(count == 1);
+	}
 }
