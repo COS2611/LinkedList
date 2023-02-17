@@ -357,6 +357,24 @@ static void test_deleteAll()
 	assert(list9.length() == 2);
 	assert(list9.front() == 3);
 	if (list9.last != NULL) { assert(list9.back() == 1); }
+	
+	// Test 10: delete first element
+	UnorderedLinkedList<int> list10;
+	list10.insertLast(10);
+	list10.insertLast(20);
+	list10.insertLast(30);
+	list10.deleteAll(10);
+	assert(list10.length() == 2);
+	assert(list10.front() == 20);
+	
+	// Test 11: delete last element
+	UnorderedLinkedList<int> list11;
+	list11.insertLast(10);
+	list11.insertLast(20);
+	list11.insertLast(30);
+	list11.deleteAll(30);
+	assert(list11.length() == 2);
+	assert(list11.front() == 10);
 }
 
 static void test_deleteSmallest()
