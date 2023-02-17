@@ -8,11 +8,6 @@
 template <class Type>
 class LinkedListType
 {
-public:
-	/// The following methods are not included in the text book:
-//	friend void deleteOc(LinkedListType<Type> &L1, const LinkedListType<Type> &L2);
-	NodeType<Type>* getFirst() const;
-	NodeType<Type>* getLast() const;
 	
 //protected:
 public:
@@ -49,6 +44,9 @@ public:
 	NodeType<Type> *evenOddIndexPartition(NodeType<Type> *head);
 	// Arranges the list such that all the even index nodes appear before the odd index nodes
 	
+	int occurrenceCounter(LinkedListType<Type>& list, Type& occur);
+	// Counts and returns the number of occurrences of an element in a list.
+	
 
 	
 	/// virtual functions (defined in derived classes)
@@ -59,12 +57,6 @@ public:
 	virtual void deleteSmallest() = 0;	// delete the first occurrence of the node with the smallest value
 	
 };
-
-template <class Type>
-NodeType<Type>* LinkedListType<Type>::getFirst() const { return first; }
-
-template <class Type>
-NodeType<Type>* LinkedListType<Type>::getLast() const { return last; }
 
 
 template <class Type>
@@ -275,80 +267,23 @@ const LinkedListType<Type>& LinkedListType<Type>::operator= (const LinkedListTyp
 	return *this;
 }
 
+template <class Type>
+int LinkedListType<Type>::occurrenceCounter(LinkedListType<Type>& list, Type& occur)
+{
+	if (this->first == NULL) { return 0; }
 
-//template <class Type>
-//NodeType<Type> LinkedListType<Type>::*evenOddIndexPartition(NodeType<Type> *head)
-//// Method 2: fewer pointers
-//{
-//	NodeType<Type> *evenPtr = head;			// pointer to the next even node
-//	NodeType<Type> *oddPtr = head->link;	// pointer to the next odd node
-//	NodeType<Type> *oddHead = oddPtr;		// start of the odd sublist
-//	
-//	// Case 1: The list is empty, or contains only one node
-//	if (!head && !head->link)
-//	{
-//		return head;
-//	}
-//	
-//	// Case 2: The list contains more than one node
-//	while (oddPtr && oddPtr->link)
-//	{
-//		evenPtr->link = oddPtr->link;
-//		evenPtr = oddPtr->link;
-//		oddPtr->link = evenPtr->link;
-//		oddPtr = evenPtr->link;
-//	}
-//	
-//	// join the end of the even list to the beginning of the odd list
-//	evenPtr->link = oddHead;
-//	
-//	return head;
-//}
-
-
-
-//template <class Type>
-//NodeType<Type> *evenOddIndexPartition(NodeType<Type> *head)
-//// Method 1: use extra pointers
-//{
-//	NodeType<Type> *current = head;	// pointer to traverse the list
-//	unsigned int index = 0;				// keep track of the index position
-//
-//	// Case 1: The list is empty, or contains only one node
-//	if (!head && !head->link)
-//	{
-//		return head;
-//	}
-//
-//	// Case 2: The list contains more than one node
-//	NodeType<Type> *oddDummy = new NodeType<Type>(-1);
-//	NodeType<Type> *evenDummy = new NodeType<Type>(-1);
-//	NodeType<Type> *oddTail = oddDummy;
-//	NodeType<Type> *evenTail = evenDummy;
-//
-//
-//	while (current)
-//	{
-//		if (index % 2 == 0)
-//		{
-//			evenTail->link = current;
-//			evenTail = current;
-//		}
-//
-//		else
-//		{
-//			oddTail->link = current;
-//			oddTail = current;
-//		}
-//
-//		current = current->link;
-//		index++;
-//	}
-//
-//	// join the end of the even list to the beginning of the odd list
-//	evenTail->link = oddDummy->link;
-//	oddTail->link = NULL;
-//}
+	NodeType<Type> *current = this->first;
+	int numOccurrences = 0;
+	while (current)
+	{
+		if (current->info == occur)
+		{
+			numOccurrences++;
+		}
+		current = current->link;
+	}
+	return numOccurrences;
+}
 
 
 
